@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Switch } from '~/components/ui/Switch';
 import { useSettings } from '~/lib/hooks/useSettings';
+import { useProviders } from '~/lib/hooks/useProviders';
 import { LOCAL_PROVIDERS, URL_CONFIGURABLE_PROVIDERS } from '~/lib/stores/settings';
 import type { IProviderConfig } from '~/types/model';
 import { logStore } from '~/lib/stores/logs';
@@ -10,7 +11,6 @@ import { BsRobot } from 'react-icons/bs';
 import type { IconType } from 'react-icons';
 import { BiChip } from 'react-icons/bi';
 import { TbBrandOpenai } from 'react-icons/tb';
-import { providerBaseUrlEnvKeys } from '~/utils/constants';
 import { useToast } from '~/components/ui/use-toast';
 import { Progress } from '~/components/ui/Progress';
 import OllamaModelInstaller from './OllamaModelInstaller';
@@ -73,6 +73,7 @@ const isOllamaPullResponse = (data: unknown): data is OllamaPullResponse => {
 
 export default function LocalProvidersTab() {
   const { providers, updateProviderSettings } = useSettings();
+  const { providerBaseUrlEnvKeys } = useProviders();
   const [filteredProviders, setFilteredProviders] = useState<IProviderConfig[]>([]);
   const [categoryEnabled, setCategoryEnabled] = useState(false);
   const [ollamaModels, setOllamaModels] = useState<OllamaModel[]>([]);

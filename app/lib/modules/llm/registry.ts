@@ -2,6 +2,7 @@ import AnthropicProvider from './providers/anthropic';
 import CohereProvider from './providers/cohere';
 import DeepseekProvider from './providers/deepseek';
 import GoogleProvider from './providers/google';
+import GCPVertexAnthropicProvider from './providers/gcp-vertex-anthropic';
 import GroqProvider from './providers/groq';
 import HuggingFaceProvider from './providers/huggingface';
 import LMStudioProvider from './providers/lmstudio';
@@ -22,6 +23,7 @@ export {
   CohereProvider,
   DeepseekProvider,
   GoogleProvider,
+  GCPVertexAnthropicProvider,
   GroqProvider,
   HuggingFaceProvider,
   HyperbolicProvider,

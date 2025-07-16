@@ -5,10 +5,11 @@ import { useAnimate } from 'framer-motion';
 import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { cssTransition, toast, ToastContainer } from 'react-toastify';
 import { useMessageParser, usePromptEnhancer, useShortcuts } from '~/lib/hooks';
+import { useProviders } from '~/lib/hooks/useProviders';
 import { description, useChatHistory } from '~/lib/persistence';
 import { chatStore } from '~/lib/stores/chat';
 import { workbenchStore } from '~/lib/stores/workbench';
-import { DEFAULT_MODEL, DEFAULT_PROVIDER, PROMPT_COOKIE_KEY, PROVIDER_LIST } from '~/utils/constants';
+import { PROMPT_COOKIE_KEY } from '~/utils/constants';
 import { cubicEasingFn } from '~/utils/easings';
 import { createScopedLogger, renderLogger } from '~/utils/logger';
 import { BaseChat } from './BaseChat';
@@ -117,6 +118,8 @@ interface ChatProps {
 export const ChatImpl = memo(
   ({ description, initialMessages, storeMessageHistory, importChat, exportChat }: ChatProps) => {
     useShortcuts();
+    
+    const { providers, defaultProvider } = useProviders();
 
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const [chatStarted, setChatStarted] = useState(initialMessages.length > 0);
@@ -137,11 +140,12 @@ export const ChatImpl = memo(
     const [llmErrorAlert, setLlmErrorAlert] = useState<LlmErrorAlertType | undefined>(undefined);
     const [model, setModel] = useState(() => {
       const savedModel = Cookies.get('selectedModel');
-      return savedModel || DEFAULT_MODEL;
+      return savedModel || 'claude-3-5-sonnet-latest';
     });
-    const [provider, setProvider] = useState(() => {
+    const [provider, setProvider] = useState<ProviderInfo | null>(() => {
       const savedProvider = Cookies.get('selectedProvider');
-      return (PROVIDER_LIST.find((p) => p.name === savedProvider) || DEFAULT_PROVIDER) as ProviderInfo;
+      const foundProvider = providers.find((p) => p.name === savedProvider);
+      return foundProvider || null;
     });
     const { showChat } = useStore(chatStore);
     const [animationScope, animate] = useAnimate();
@@ -198,7 +202,7 @@ export const ChatImpl = memo(
             component: 'Chat',
             action: 'response',
             model,
-            provider: provider.name,
+            provider: provider?.name,
             usage,
             messageLength: message.content.length,
           });
@@ -219,7 +223,7 @@ export const ChatImpl = memo(
         runAnimation();
         append({
           role: 'user',
-          content: `[Model: ${model}]\n\n[Provider: ${provider.name}]\n\n${prompt}`,
+          content: `[Model: ${model}]\n\n[Provider: ${provider?.name}]\n\n${prompt}`,
         });
       }
     }, [model, provider, searchParams]);
@@ -260,7 +264,7 @@ export const ChatImpl = memo(
         component: 'Chat',
         action: 'abort',
         model,
-        provider: provider.name,
+        provider: provider?.name,
       });
     };
 
@@ -275,7 +279,7 @@ export const ChatImpl = memo(
           message: 'An unexpected error occurred',
           isRetryable: true,
           statusCode: 500,
-          provider: provider.name,
+          provider: provider?.name,
           type: 'unknown' as const,
           retryDelay: 0,
         };
@@ -318,7 +322,7 @@ export const ChatImpl = memo(
           context,
           retryable: errorInfo.isRetryable,
           errorType,
-          provider: provider.name,
+          provider: provider?.name,
         });
 
         // Create API error alert
@@ -326,12 +330,12 @@ export const ChatImpl = memo(
           type: 'error',
           title,
           description: errorInfo.message,
-          provider: provider.name,
+          provider: provider?.name,
           errorType,
         });
         setData([]);
       },
-      [provider.name, stop],
+      [provider?.name, stop],
     );
 
     const clearApiErrorAlert = useCallback(() => {
@@ -365,6 +369,14 @@ export const ChatImpl = memo(
 
       setChatStarted(true);
     };
+
+    // Effect to set default provider when providers are loaded
+    useEffect(() => {
+      if (!provider && providers.length > 0) {
+        const defaultProviderObj = providers.find(p => p.name === defaultProvider) || providers[0];
+        setProvider(defaultProviderObj);
+      }
+    }, [providers, defaultProvider, provider]);
 
     // Helper function to create message parts array from text and images
     const createMessageParts = (text: string, images: string[] = []): Array<TextUIPart | FileUIPart> => {
@@ -449,7 +461,7 @@ export const ChatImpl = memo(
           const { template, title } = await selectStarterTemplate({
             message: finalMessageContent,
             model,
-            provider,
+            provider: provider || providers.find(p => p.name === defaultProvider) || providers[0],
           });
 
           if (template !== 'blank') {
@@ -465,7 +477,7 @@ export const ChatImpl = memo(
 
             if (temResp) {
               const { assistantMessage, userMessage } = temResp;
-              const userMessageText = `[Model: ${model}]\n\n[Provider: ${provider.name}]\n\n${finalMessageContent}`;
+              const userMessageText = `[Model: ${model}]\n\n[Provider: ${provider?.name}]\n\n${finalMessageContent}`;
 
               setMessages([
                 {
@@ -482,7 +494,7 @@ export const ChatImpl = memo(
                 {
                   id: `3-${new Date().getTime()}`,
                   role: 'user',
-                  content: `[Model: ${model}]\n\n[Provider: ${provider.name}]\n\n${userMessage}`,
+                  content: `[Model: ${model}]\n\n[Provider: ${provider?.name}]\n\n${userMessage}`,
                   annotations: ['hidden'],
                 },
               ]);
@@ -510,7 +522,7 @@ export const ChatImpl = memo(
         }
 
         // If autoSelectTemplate is disabled or template selection failed, proceed with normal message
-        const userMessageText = `[Model: ${model}]\n\n[Provider: ${provider.name}]\n\n${finalMessageContent}`;
+        const userMessageText = `[Model: ${model}]\n\n[Provider: ${provider?.name}]\n\n${finalMessageContent}`;
         const attachments = uploadedFiles.length > 0 ? await filesToAttachments(uploadedFiles) : undefined;
 
         setMessages([
@@ -547,7 +559,7 @@ export const ChatImpl = memo(
 
       if (modifiedFiles !== undefined) {
         const userUpdateArtifact = filesToArtifacts(modifiedFiles, `${Date.now()}`);
-        const messageText = `[Model: ${model}]\n\n[Provider: ${provider.name}]\n\n${userUpdateArtifact}${finalMessageContent}`;
+        const messageText = `[Model: ${model}]\n\n[Provider: ${provider?.name}]\n\n${userUpdateArtifact}${finalMessageContent}`;
 
         const attachmentOptions =
           uploadedFiles.length > 0 ? { experimental_attachments: await filesToAttachments(uploadedFiles) } : undefined;
@@ -563,7 +575,7 @@ export const ChatImpl = memo(
 
         workbenchStore.resetAllFileModifications();
       } else {
-        const messageText = `[Model: ${model}]\n\n[Provider: ${provider.name}]\n\n${finalMessageContent}`;
+        const messageText = `[Model: ${model}]\n\n[Provider: ${provider?.name}]\n\n${finalMessageContent}`;
 
         const attachmentOptions =
           uploadedFiles.length > 0 ? { experimental_attachments: await filesToAttachments(uploadedFiles) } : undefined;
@@ -624,7 +636,7 @@ export const ChatImpl = memo(
 
     const handleProviderChange = (newProvider: ProviderInfo) => {
       setProvider(newProvider);
-      Cookies.set('selectedProvider', newProvider.name, { expires: 30 });
+      Cookies.set('selectedProvider', newProvider.name);
     };
 
     return (
@@ -643,7 +655,7 @@ export const ChatImpl = memo(
         sendMessage={sendMessage}
         model={model}
         setModel={handleModelChange}
-        provider={provider}
+        provider={provider || providers.find(p => p.name === defaultProvider) || providers[0]}
         setProvider={handleProviderChange}
         providerList={activeProviders}
         handleInputChange={(e) => {
@@ -672,7 +684,7 @@ export const ChatImpl = memo(
               scrollTextArea();
             },
             model,
-            provider,
+            provider || providers.find(p => p.name === defaultProvider) || providers[0],
             apiKeys,
           );
         }}

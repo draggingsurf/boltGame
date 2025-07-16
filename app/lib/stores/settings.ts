@@ -1,5 +1,4 @@
 import { atom, map } from 'nanostores';
-import { PROVIDER_LIST } from '~/utils/constants';
 import type { IProviderConfig } from '~/types/model';
 import type { TabVisibilityConfig, TabWindowConfig, UserTabConfig } from '~/components/@settings/core/types';
 import { DEFAULT_TAB_CONFIG } from '~/components/@settings/core/constants';
@@ -56,20 +55,10 @@ const PROVIDER_SETTINGS_KEY = 'provider_settings';
 // Add this helper function at the top of the file
 const isBrowser = typeof window !== 'undefined';
 
-// Initialize provider settings from both localStorage and defaults
+// Initialize provider settings from localStorage only
+// Provider defaults will be populated when useProviders hook loads the data
 const getInitialProviderSettings = (): ProviderSetting => {
   const initialSettings: ProviderSetting = {};
-
-  // Start with default settings
-  PROVIDER_LIST.forEach((provider) => {
-    initialSettings[provider.name] = {
-      ...provider,
-      settings: {
-        // Local providers should be disabled by default
-        enabled: !LOCAL_PROVIDERS.includes(provider.name),
-      },
-    };
-  });
 
   // Only try to load from localStorage in the browser
   if (isBrowser) {
@@ -94,15 +83,50 @@ const getInitialProviderSettings = (): ProviderSetting => {
 
 export const providersStore = map<ProviderSetting>(getInitialProviderSettings());
 
-// Create a function to update provider settings that handles both store and persistence
-export const updateProviderSettings = (provider: string, settings: ProviderSetting) => {
+// Function to initialize providers from API data
+export const initializeProviders = (providers: Array<{
+  name: string;
+  staticModels: any[];
+  getApiKeyLink?: string;
+  labelForGetApiKey?: string;
+  icon?: string;
+}>) => {
   const currentSettings = providersStore.get();
+  const newSettings: ProviderSetting = {};
+
+  providers.forEach((provider) => {
+    const existingSettings = currentSettings[provider.name];
+    newSettings[provider.name] = {
+      ...provider,
+      settings: {
+        // Use existing settings if available, otherwise set defaults
+        enabled: existingSettings?.settings?.enabled ?? !LOCAL_PROVIDERS.includes(provider.name),
+        baseUrl: existingSettings?.settings?.baseUrl,
+      },
+    };
+  });
+
+  // Update the store with all provider data
+  Object.keys(newSettings).forEach(providerName => {
+    providersStore.setKey(providerName, newSettings[providerName]);
+  });
+};
+
+// Create a function to update provider settings that handles both store and persistence
+export const updateProviderSettings = (provider: string, settings: Partial<{ enabled: boolean; baseUrl?: string }>) => {
+  const currentSettings = providersStore.get();
+  const currentProvider = currentSettings[provider];
+
+  if (!currentProvider) {
+    console.warn(`Provider ${provider} not found in settings store`);
+    return;
+  }
 
   // Create new provider config with updated settings
   const updatedProvider = {
-    ...currentSettings[provider],
+    ...currentProvider,
     settings: {
-      ...currentSettings[provider].settings,
+      ...currentProvider.settings,
       ...settings,
     },
   };
