@@ -378,6 +378,25 @@ export class ActionRunner {
       logger.warn('This violates the asset-first GameTerminal methodology.');
     }
     
+    // Check for missing animations in platformer games
+    if (isPlatformer && content.includes('player')) {
+      const hasWalkFrames = content.includes('player_walk1') && content.includes('player_walk2');
+      const hasAnimations = content.includes('this.anims.create') || content.includes('player.play');
+      
+      if (!hasWalkFrames) {
+        logger.warn('🎬 ANIMATION WARNING: Missing walking animation frames!');
+        logger.warn('✅ Load: this.load.image("player_walk1", "/game-assets/sprites/player_walk1.png")');
+        logger.warn('✅ Load: this.load.image("player_walk2", "/game-assets/sprites/player_walk2.png")');
+      }
+      
+      if (!hasAnimations) {
+        logger.warn('🎬 ANIMATION WARNING: No animation system detected!');
+        logger.warn('✅ Create: this.anims.create() for walk cycles');
+        logger.warn('✅ Play: player.play("player_walk", true) when moving');
+        logger.warn('Game will look static without proper animations!');
+      }
+    }
+    
     return gameIndicators.some(indicator => 
       content.includes(indicator) || filePath.includes('game')
     );

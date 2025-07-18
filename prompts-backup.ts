@@ -1312,7 +1312,7 @@ Here are some examples of correct usage of artifacts:
       **Technical**:
       - Engine: Phaser 3
       - View: Top-down
-      - Assets: Built-in Kenney sprites from /game-assets/
+      - Assets: Colored rectangles initially
       - Audio: Laser sounds, explosion effects
 
       Does this look correct? Would you like me to modify anything before I start coding?
@@ -1684,96 +1684,6 @@ If any chunk exceeds output limit:
 - Terminal access for npm install && npm run dev
 
 This approach ensures no token overflow while maintaining code quality and investor-level polish.
-
-**🎬 CRITICAL ANIMATION SYSTEM - MAKE GAMES FEEL ALIVE**
-
-**🚶 CHARACTER ANIMATIONS (MANDATORY FOR KENNEY GAMES):**
-
-**AVAILABLE KENNEY ANIMATION FRAMES:**
-- player.png (idle/standing)
-- player_walk1.png & player_walk2.png (walking cycle)  
-- player_jump.png (jumping/falling)
-- player_hit.png (damage/hurt)
-- enemy.png, enemy_walk1.png, enemy_walk2.png (enemy patrol)
-
-**REQUIRED ANIMATION SETUP:**
-// In preload() - Load all animation frames
-this.load.image('player_idle', '/game-assets/sprites/player.png');
-this.load.image('player_walk1', '/game-assets/sprites/player_walk1.png');
-this.load.image('player_walk2', '/game-assets/sprites/player_walk2.png');
-this.load.image('player_jump', '/game-assets/sprites/player_jump.png');
-
-// In create() - Create smooth animations
-this.anims.create({
-  key: 'player_walk',
-  frames: [
-    { key: 'player_walk1' },
-    { key: 'player_walk2' }
-  ],
-  frameRate: 8,
-  repeat: -1
-});
-
-// In update() - Dynamic animation switching
-if (player.body.velocity.x !== 0) {
-  player.play('player_walk', true);
-  player.setFlipX(player.body.velocity.x < 0);
-} else {
-  player.play('player_idle', true);
-}
-
-**🎯 GRAPHICS CAPABILITY LEVELS:**
-
-**LEVEL 1 - SMOOTH ANIMATIONS (Use Kenney Assets):**
-✅ 2-frame walking cycles with proper timing
-✅ Sprite flipping for direction changes
-✅ Jump and hit state animations
-✅ Enemy patrol with walk cycles
-✅ Idle animations when stationary
-
-**LEVEL 2 - VISUAL EFFECTS:**
-✅ Particle systems for coin collection
-✅ Screen shake on impacts
-✅ Smooth camera following with lerp
-✅ Tween-based UI animations
-✅ Color tinting for power-ups
-
-**LEVEL 3 - ADVANCED POLISH:**
-✅ Trail effects for fast movement
-✅ Parallax background scrolling
-✅ Weather particle effects
-✅ Complex explosion systems
-✅ Lighting and glow effects
-
-**🔥 POWER-UP VISUAL SYSTEM:**
-
-**POWER-UP EFFECTS (MANDATORY IMPLEMENTATION):**
-- Speed Boost: Blue tint + trail particles
-- Jump Boost: Yellow glow + larger jump arc
-- Invincibility: Rainbow color cycling
-- Coin Magnet: Magnetic pull with curve tweens
-- Size Power: Smooth scale animation
-
-**VISUAL FEEDBACK REQUIREMENTS:**
-- Particle explosion on coin collection
-- Screen flash on power-up pickup
-- Player tint changes for active power-ups
-- Smooth number tweening for score
-- Bounce animation for UI elements
-
-**🚨 ANIMATION VIOLATIONS TO DETECT:**
-❌ Static sprites during movement (no walk cycle)
-❌ Instant direction changes (no sprite flipping)
-❌ No visual feedback for interactions
-❌ Missing idle animations
-❌ Jerky movement without smooth interpolation
-
-**BEFORE (Broken/Static) vs AFTER (Animated/Professional):**
-BEFORE: Player slides without walking frames
-AFTER: Smooth 2-frame walk cycle with direction flipping
-
-BEFORE: No feedback on coin collection  
-AFTER: Particle explosion + screen flash + score animation
 `;
 
 export const CONTINUE_PROMPT = stripIndents`
