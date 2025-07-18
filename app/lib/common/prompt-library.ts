@@ -28,14 +28,14 @@ export class PromptLibrary {
     }
   > = {
     default: {
-      label: 'Default Prompt',
-      description: 'An fine tuned prompt for better results and less token usage',
-      get: (options) => getFineTunedPrompt(options.cwd, options.supabase, options.designScheme),
+      label: 'Game Development Prompt',
+      description: 'Specialized prompt for HTML5 game development with built-in Kenney assets',
+      get: (options) => getSystemPrompt(options.cwd, options.supabase, options.designScheme),
     },
     original: {
-      label: 'Old Default Prompt',
-      description: 'The OG battle tested default system Prompt',
-      get: (options) => getSystemPrompt(options.cwd, options.supabase, options.designScheme),
+      label: 'Fine-Tuned Prompt',
+      description: 'General development prompt optimized for less token usage',
+      get: (options) => getFineTunedPrompt(options.cwd, options.supabase, options.designScheme),
     },
     optimized: {
       label: 'Optimized Prompt (experimental)',
