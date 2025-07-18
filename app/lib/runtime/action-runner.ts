@@ -338,8 +338,15 @@ export class ActionRunner {
   #isGameFile(filePath: string, content: string): boolean {
     const gameIndicators = [
       'phaser', 'Phaser', 'kaboom', 'game', 'player', 'enemy', 'coin',
-      'this.load.image', 'preload()', 'create()', 'update()'
+      'this.load.image', 'preload()', 'create()', 'update()', 'sprite',
+      'physics', 'scene', 'canvas', 'arcade'
     ];
+    
+    // Detect game genre for smart asset recommendations
+    const isPlatformer = content.includes('platform') || content.includes('jump') || content.includes('gravity');
+    const isPuzzle = content.includes('snake') || content.includes('tetris') || content.includes('grid') || content.includes('ludo');
+    const isBoard = content.includes('chess') || content.includes('checkers') || content.includes('board');
+    const isCard = content.includes('poker') || content.includes('card') || content.includes('deck');
     
     // Check for canvas drawing violations
     const canvasViolations = [
@@ -351,9 +358,23 @@ export class ActionRunner {
     if (hasViolations) {
       logger.warn('🚨 ASSET VIOLATION DETECTED: Game file contains canvas drawing commands instead of sprite loading!');
       logger.warn('File:', filePath);
-      logger.warn('❌ Found canvas drawing - should use Kenney PNG sprites instead');
-      logger.warn('✅ Use: this.load.image("player", "/game-assets/sprites/player.png")');
-      logger.warn('✅ Use: this.add.sprite(x, y, "player")');
+      
+      if (isPlatformer) {
+        logger.warn('🎮 PLATFORMER DETECTED: Use Kenney sprites for professional graphics');
+        logger.warn('✅ Use: this.load.image("player", "/game-assets/sprites/player.png")');
+        logger.warn('✅ Use: this.load.image("coin", "/game-assets/sprites/coin.png")');
+        logger.warn('✅ Use: this.add.sprite(x, y, "player").setScale(0.8)');
+      } else if (isPuzzle || isBoard || isCard) {
+        logger.warn('🧩 PUZZLE/BOARD GAME DETECTED: Use geometric shapes, not canvas drawing');
+        logger.warn('✅ Use: this.add.rectangle(x, y, width, height, color)');
+        logger.warn('✅ Use: this.add.circle(x, y, radius, color)');
+        logger.warn('✅ Use: this.add.text(x, y, "text", {fontSize: "32px"})');
+      } else {
+        logger.warn('❌ Found canvas drawing - should use proper Phaser graphics');
+        logger.warn('✅ Use: this.add.sprite() for characters and objects');
+        logger.warn('✅ Use: this.add.rectangle() for simple shapes');
+      }
+      
       logger.warn('This violates the asset-first GameTerminal methodology.');
     }
     
