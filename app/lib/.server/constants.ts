@@ -1,6 +1,6 @@
 import { LLMManager } from '~/lib/modules/llm/manager';
 
-export const DEFAULT_MODEL = 'claude-3-5-sonnet-latest';
+export const DEFAULT_MODEL = 'claude-opus-4@20250514';
 
 const llmManager = LLMManager.getInstance(process.env as Record<string, string>);
 

@@ -140,7 +140,7 @@ export const ChatImpl = memo(
     const [llmErrorAlert, setLlmErrorAlert] = useState<LlmErrorAlertType | undefined>(undefined);
     const [model, setModel] = useState(() => {
       const savedModel = Cookies.get('selectedModel');
-      return savedModel || 'claude-3-5-sonnet-latest';
+      return savedModel || 'claude-opus-4@20250514';
     });
     const [provider, setProvider] = useState<ProviderInfo | null>(() => {
       const savedProvider = Cookies.get('selectedProvider');

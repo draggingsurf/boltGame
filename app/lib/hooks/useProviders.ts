@@ -56,7 +56,7 @@ export function useProviders() {
 
   return {
     providers: data?.providers || [],
-    defaultProvider: data?.defaultProvider || 'Anthropic',
+    defaultProvider: data?.defaultProvider || 'GCP-Vertex-Anthropic',
     providerBaseUrlEnvKeys: data?.providerBaseUrlEnvKeys || {},
     loading,
     error,
