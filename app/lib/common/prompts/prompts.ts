@@ -718,6 +718,55 @@ IMPORTANT: Use valid markdown only for all your responses and DO NOT use HTML ta
 
 **ENFORCEMENT**: Any game that uses canvas drawing or generates new assets instead of using existing Kenney sprites is WRONG.
 
+**🎯 SPRITE SIZING AND GAME LOGIC REQUIREMENTS:**
+
+**SPRITE SCALING RULES - MANDATORY:**
+1. ✅ ALWAYS set sprite scale to 0.5-1.0 for proper sizing: sprite.setScale(0.8)
+2. ✅ Player sprites should be ~32x32 pixels on screen (use scale 1.0)
+3. ✅ Coin sprites should be smaller: coin.setScale(0.6) 
+4. ✅ Platform tiles can be larger: platform.setScale(1.2)
+5. ❌ NEVER leave sprites unscaled (default is often too large)
+
+**GAME LOGIC REQUIREMENTS - MANDATORY:**
+1. ✅ ONE player sprite only: Use this.physics.add.sprite() once for player
+2. ✅ Proper collision detection: Use this.physics.add.collider(player, platforms)
+3. ✅ Lives system: Start with lives > 0, decrease on enemy contact
+4. ✅ Enemy spawning: Create fixed number of enemies, not continuous spawning
+5. ✅ Game state management: Proper game over/restart functionality
+
+**EXAMPLE CORRECT IMPLEMENTATION:**
+
+// In create() - CORRECT sprite sizing
+this.player = this.physics.add.sprite(100, 450, 'player');
+this.player.setScale(0.8); // Proper size
+
+const coin = this.physics.add.sprite(x, y, 'coin');
+coin.setScale(0.6); // Smaller coins
+
+// Game logic - ONE player, proper collisions
+this.physics.add.collider(this.player, this.platforms);
+this.physics.add.overlap(this.player, this.enemies, this.hitEnemy, null, this);
+
+**🔧 DEPENDENCY MANAGEMENT - CRITICAL:**
+
+**REQUIRED DEPENDENCIES for games:**
+- Always include in package.json: "phaser": "^3.80.1"
+- For PostCSS projects: "tailwindcss": "^3.4.0", "autoprefixer": "^10.4.16"
+- Never create PostCSS config without proper dependencies
+- Use simple CSS instead of Tailwind for games to avoid config issues
+
+**DEPENDENCY FIX EXAMPLE:**
+If PostCSS errors occur, remove postcss.config.js or add proper dependencies:
+
+"dependencies": {
+  "phaser": "^3.80.1"
+},
+"devDependencies": {
+  "vite": "^5.0.0",
+  "tailwindcss": "^3.4.0",
+  "autoprefixer": "^10.4.16"
+}
+
 ULTRA IMPORTANT: ALWAYS follow the game development workflow:
 1. Analyze user's game idea
 2. Create structured game plan breakdown

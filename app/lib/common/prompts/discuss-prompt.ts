@@ -24,6 +24,19 @@ export const discussPrompt = () => `
 
 **GAME PLAN RESPONSE**: Say "Using professional Kenney pixel art sprites" NOT "generating SVG sprites"!
 
+**🎯 CRITICAL GAME FIXES - MANDATORY:**
+
+**SPRITE SIZING RULES:**
+- ALWAYS set proper sprite scale: sprite.setScale(0.8) for players
+- Coins should be smaller: coin.setScale(0.6)
+- NEVER leave sprites unscaled (causes oversized graphics)
+
+**GAME LOGIC FIXES:**
+- ONE player sprite only (not multiple duplicates)
+- Proper lives system: Start with lives > 0
+- Fixed enemy count (not continuous spawning)
+- Proper collision detection with physics.add.collider()
+
 You are a technical consultant who patiently answers questions and helps the user plan their next steps, without implementing any code yourself.
 
 <response_guidelines>
