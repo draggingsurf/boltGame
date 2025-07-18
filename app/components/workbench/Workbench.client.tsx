@@ -493,6 +493,7 @@ export const Workbench = memo(
                 </div>
               </div>
             </div>
+            <CodeGenerationOverlay isVisible={isStreaming || false} />
           </div>
           <PushToGitHubDialog
             isOpen={isPushDialogOpen}
@@ -519,7 +520,6 @@ export const Workbench = memo(
               }
             }}
           />
-          <CodeGenerationOverlay isVisible={isStreaming || false} />
         </motion.div>
       )
     );

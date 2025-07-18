@@ -14,135 +14,87 @@ const GENERATION_MESSAGES = [
 
 export function CodeGenerationOverlay({ isVisible }: CodeGenerationOverlayProps) {
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
-  const [displayedText, setDisplayedText] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
 
   useEffect(() => {
     if (!isVisible) {
       setCurrentMessageIndex(0);
-      setDisplayedText('');
-      setIsTyping(false);
       return;
     }
 
-    // Start typing animation immediately when visible
-    setIsTyping(true);
-    
-    const messageChangeInterval = setInterval(() => {
+    const interval = setInterval(() => {
       setCurrentMessageIndex((prev) => (prev + 1) % GENERATION_MESSAGES.length);
-    }, 5000); // 5 seconds between messages
+    }, 10000); // 10 seconds interval as requested
 
-    return () => clearInterval(messageChangeInterval);
+    return () => clearInterval(interval);
   }, [isVisible]);
-
-  // Typewriter effect for current message
-  useEffect(() => {
-    if (!isVisible) return;
-
-    const currentMessage = GENERATION_MESSAGES[currentMessageIndex];
-    setDisplayedText('');
-    setIsTyping(true);
-
-    let charIndex = 0;
-    const typewriterInterval = setInterval(() => {
-      if (charIndex <= currentMessage.length) {
-        setDisplayedText(currentMessage.slice(0, charIndex));
-        charIndex++;
-      } else {
-        setIsTyping(false);
-        clearInterval(typewriterInterval);
-      }
-    }, 50); // 50ms per character for smooth typing
-
-    return () => clearInterval(typewriterInterval);
-  }, [currentMessageIndex, isVisible]);
 
   if (!isVisible) return null;
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0, transition: { duration: 0 } }} // Instant removal
-      transition={{ duration: 0.3 }}
+    <div
       className="fixed inset-0 z-[9999] flex items-center justify-center"
       style={{ 
-        backgroundColor: 'rgba(5, 5, 5, 0.92)',
-        backdropFilter: 'blur(4px)',
+        backgroundColor: 'rgba(5, 5, 5, 0.95)',
+        backdropFilter: 'blur(6px)',
         pointerEvents: 'all'
       }}
     >
-      <div className="text-center max-w-2xl px-8">
-        {/* Animated Game Controller */}
-        <motion.div
-          animate={{ 
-            rotate: [0, 5, -5, 0],
-            scale: [1, 1.05, 1]
-          }}
-          transition={{ 
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          className="text-7xl mb-8"
-        >
-          🎮
-        </motion.div>
-
-        {/* Typewriter Text */}
-        <div className="mb-12 h-16 flex items-center justify-center">
-          <motion.h2 
-            className="text-2xl font-semibold text-emerald-400"
+      <div className="text-center max-w-md mx-auto px-6">
+        {/* Rotating Messages with Typewriter Effect */}
+        <AnimatePresence mode="wait">
+          <motion.div
             key={currentMessageIndex}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="mb-12"
           >
-            {displayedText}
-            {isTyping && (
-              <motion.span
-                animate={{ opacity: [1, 0] }}
-                transition={{ 
-                  duration: 0.8, 
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-                className="text-emerald-300"
-              >
-                |
-              </motion.span>
-            )}
-          </motion.h2>
-        </div>
+            <motion.h3 
+              className="text-2xl font-light text-white leading-relaxed"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ 
+                duration: 2,
+                ease: "easeOut"
+              }}
+            >
+              {GENERATION_MESSAGES[currentMessageIndex]}
+            </motion.h3>
+          </motion.div>
+        </AnimatePresence>
 
-        {/* Glowing Progress Animation */}
+        {/* Glowing Progress Bar */}
         <div className="relative">
-          {/* Progress Container */}
-          <div className="w-80 h-2 bg-slate-800 rounded-full mx-auto mb-4 overflow-hidden">
+          <div className="w-80 h-1 bg-gray-800/50 rounded-full overflow-hidden mx-auto">
             <motion.div
-              className="h-full bg-gradient-to-r from-emerald-500 via-blue-500 to-emerald-500 rounded-full"
+              className="h-full bg-gradient-to-r from-emerald-400 via-blue-400 to-emerald-400 rounded-full"
+              style={{
+                boxShadow: '0 0 20px rgba(16, 185, 129, 0.6)',
+              }}
               animate={{
-                x: ['-100%', '100%'],
-                opacity: [0.6, 1, 0.6]
+                x: ["-100%", "100%"],
               }}
               transition={{
-                x: { duration: 2, repeat: Infinity, ease: "easeInOut" },
-                opacity: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut",
               }}
-              style={{ width: '50%' }}
             />
           </div>
-
-          {/* Pulsing Orbs */}
-          <div className="flex justify-center items-center space-x-3">
-            {[0, 1, 2, 3].map((i) => (
+          
+          {/* Glowing dots */}
+          <div className="flex justify-center items-center space-x-3 mt-8">
+            {[0, 1, 2].map((i) => (
               <motion.div
                 key={i}
+                className="w-2 h-2 rounded-full bg-emerald-400"
+                style={{
+                  boxShadow: '0 0 10px rgba(16, 185, 129, 0.8)',
+                }}
                 animate={{
                   scale: [0.8, 1.2, 0.8],
-                  opacity: [0.4, 1, 0.4],
-                  boxShadow: [
-                    '0 0 5px rgba(16, 185, 129, 0.3)',
-                    '0 0 20px rgba(16, 185, 129, 0.8)',
-                    '0 0 5px rgba(16, 185, 129, 0.3)'
-                  ]
+                  opacity: [0.4, 1, 0.4]
                 }}
                 transition={{
                   duration: 2,
@@ -150,21 +102,11 @@ export function CodeGenerationOverlay({ isVisible }: CodeGenerationOverlayProps)
                   delay: i * 0.3,
                   ease: "easeInOut"
                 }}
-                className="w-2 h-2 bg-emerald-400 rounded-full"
               />
             ))}
           </div>
-
-          {/* Status Text */}
-          <motion.p 
-            className="text-sm text-slate-400 mt-6"
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          >
-            Generating your game code...
-          </motion.p>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 } 
