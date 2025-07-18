@@ -1,0 +1,46 @@
+# Dependencies
+node_modules
+.pnpm-store
+
+# Build outputs (keep only what Vercel needs)
+.output
+dist
+build/server/index.js.map
+
+# Development files
+.env.local
+.env.development
+.wrangler
+
+# Docker files
+Dockerfile*
+docker-compose*
+
+# Electron files
+electron/
+*.electron.js
+
+# Testing
+coverage/
+.vitest
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Cache
+.cache/
+.turbo/
+.eslintcache
+
+# Scripts that are Cloudflare-specific
+bindings.sh
+wrangler.toml 

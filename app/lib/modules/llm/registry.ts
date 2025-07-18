@@ -19,11 +19,11 @@ import AmazonBedrockProvider from './providers/amazon-bedrock';
 import GithubProvider from './providers/github';
 
 export {
+  GCPVertexAnthropicProvider,
   AnthropicProvider,
   CohereProvider,
   DeepseekProvider,
   GoogleProvider,
-  GCPVertexAnthropicProvider,
   GroqProvider,
   HuggingFaceProvider,
   HyperbolicProvider,
