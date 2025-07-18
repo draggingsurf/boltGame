@@ -27,6 +27,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { usePreviewStore } from '~/lib/stores/previews';
 import { chatStore } from '~/lib/stores/chat';
 import type { ElementInfo } from './Inspector';
+import { CodeGenerationOverlay } from './CodeGenerationOverlay';
 
 interface WorkspaceProps {
   chatStarted?: boolean;
@@ -518,6 +519,7 @@ export const Workbench = memo(
               }
             }}
           />
+          <CodeGenerationOverlay isVisible={isStreaming || false} />
         </motion.div>
       )
     );
