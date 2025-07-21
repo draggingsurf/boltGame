@@ -69,13 +69,9 @@ export function GradientCard({
   return (
     <motion.div
       className={classNames(
-        'p-5 rounded-xl bg-gradient-to-br',
+        'p-5 rounded-xl bg-gradient-to-br glass-panel',
         gradientClass,
-        borderEffect
-          ? 'border border-bolt-elements-borderColor dark:border-bolt-elements-borderColor-dark hover:border-purple-500/40'
-          : '',
-        'transition-all duration-300 shadow-sm',
-        hoverEffect ? 'hover:shadow-md' : '',
+        borderEffect ? 'hover:border-[#8EFD47]/60' : '',
         className,
       )}
       {...hoverAnimation}

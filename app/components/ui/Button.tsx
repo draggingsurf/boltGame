@@ -3,24 +3,24 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { classNames } from '~/utils/classNames';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-bolt-elements-borderColor disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-bolt-elements-borderColor disabled:pointer-events-none disabled:opacity-50 glass-button',
   {
     variants: {
       variant: {
-        default: 'bg-bolt-elements-background text-bolt-elements-textPrimary hover:bg-bolt-elements-background-depth-2',
-        destructive: 'bg-red-500 text-white hover:bg-red-600',
+        default: 'text-bolt-elements-textPrimary hover:text-white',
+        destructive: 'bg-red-500/20 text-red-400 border-red-500/40 hover:bg-red-500/30 hover:border-red-400 hover:shadow-[0_0_20px_rgba(239,68,68,0.3)]',
         outline:
-          'border border-bolt-elements-borderColor bg-transparent hover:bg-bolt-elements-background-depth-2 hover:text-bolt-elements-textPrimary text-bolt-elements-textPrimary dark:border-bolt-elements-borderColorActive',
+          'border-bolt-elements-borderColor text-bolt-elements-textPrimary hover:text-white',
         secondary:
-          'bg-bolt-elements-background-depth-1 text-bolt-elements-textPrimary hover:bg-bolt-elements-background-depth-2',
-        ghost: 'hover:bg-bolt-elements-background-depth-1 hover:text-bolt-elements-textPrimary',
-        link: 'text-bolt-elements-textPrimary underline-offset-4 hover:underline',
+          'text-bolt-elements-textPrimary hover:text-white',
+        ghost: 'border-transparent hover:text-white hover:border-[#8EFD47]/60',
+        link: 'text-bolt-elements-textPrimary underline-offset-4 hover:underline border-transparent backdrop-filter-none bg-transparent shadow-none',
       },
       size: {
-        default: 'h-9 px-4 py-2',
-        sm: 'h-8 rounded-md px-3 text-xs',
-        lg: 'h-10 rounded-md px-8',
-        icon: 'h-9 w-9',
+        default: 'h-9 px-4 py-2 rounded-xl',
+        sm: 'h-8 px-3 text-xs rounded-lg',
+        lg: 'h-10 px-8 rounded-xl',
+        icon: 'h-9 w-9 rounded-xl',
       },
     },
     defaultVariants: {

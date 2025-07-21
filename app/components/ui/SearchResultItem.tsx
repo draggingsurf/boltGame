@@ -39,7 +39,7 @@ export function SearchResultItem({
   return (
     <motion.div
       className={classNames(
-        'p-5 rounded-xl border border-bolt-elements-borderColor dark:border-bolt-elements-borderColor-dark hover:border-purple-500/40 transition-all duration-300 shadow-sm hover:shadow-md bg-bolt-elements-background-depth-1/50 dark:bg-bolt-elements-background-depth-3/50',
+        'p-5 glass-panel hover:border-[#8EFD47]/60',
         onClick ? 'cursor-pointer' : '',
         className,
       )}

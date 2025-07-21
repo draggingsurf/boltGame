@@ -1,0 +1,10 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <!-- White G+ logo simplified for favicon -->
+  <g transform="translate(2, 2)">
+    <!-- Main G shape -->
+    <path d="M0 14 C0 6.3 6.3 0 14 0 L21 0 L21 7 L14 7 C10.1 7 7 10.1 7 14 L7 14 C7 17.9 10.1 21 14 21 L17.5 21 L17.5 14 L14 14 L14 10.5 L24.5 10.5 L24.5 21 C24.5 24.9 21.4 28 17.5 28 L14 28 C6.3 28 0 21.7 0 14 Z" fill="#FFFFFF"/>
+    <!-- Plus sign -->
+    <rect x="18" y="12" width="7" height="2" fill="#FFFFFF"/>
+    <rect x="21" y="9" width="2" height="7" fill="#FFFFFF"/>
+  </g>
+</svg>

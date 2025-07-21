@@ -500,10 +500,13 @@ function FileContextMenu({
         </ContextMenu.Trigger>
         <ContextMenu.Portal>
           <ContextMenu.Content
-            style={{ zIndex: 998 }}
-            className="border border-bolt-elements-borderColor rounded-md z-context-menu bg-bolt-elements-background-depth-1 dark:bg-bolt-elements-background-depth-2 data-[state=open]:animate-in animate-duration-100 data-[state=open]:fade-in-0 data-[state=open]:zoom-in-98 w-56"
+            className="rounded-md z-context-menu bg-bolt-elements-background-depth-1 dark:bg-bolt-elements-background-depth-2 data-[state=open]:animate-in animate-duration-100 data-[state=open]:fade-in-0 data-[state=open]:zoom-in-98 w-56"
+            style={{ 
+              zIndex: 998,
+              border: 'var(--context-menu-border)',
+            }}
           >
-            <ContextMenu.Group className="p-1 border-b-px border-solid border-bolt-elements-borderColor">
+            <ContextMenu.Group className="p-1" style={{ borderBottom: 'var(--context-menu-separator-border)' }}>
               <ContextMenuItem onSelect={() => setIsCreatingFile(true)}>
                 <div className="flex items-center gap-2">
                   <div className="i-ph:file-plus" />

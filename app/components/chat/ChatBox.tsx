@@ -63,7 +63,7 @@ export const ChatBox: React.FC<ChatBoxProps> = (props) => {
   return (
     <div
       className={classNames(
-        'relative bg-bolt-elements-background-depth-2 backdrop-blur p-3 rounded-lg border border-bolt-elements-borderColor relative w-full max-w-chat mx-auto z-prompt',
+        'relative glass-panel p-3 w-full max-w-chat mx-auto z-prompt',
 
         /*
          * {
@@ -240,10 +240,10 @@ export const ChatBox: React.FC<ChatBoxProps> = (props) => {
               <IconButton
                 title="Discuss"
                 className={classNames(
-                  'transition-all flex items-center gap-1 px-1.5',
+                  'glass-button flex items-center gap-1 px-1.5',
                   props.chatMode === 'discuss'
-                    ? '!bg-bolt-elements-item-backgroundAccent !text-bolt-elements-item-contentAccent'
-                    : 'bg-bolt-elements-item-backgroundDefault text-bolt-elements-item-contentDefault',
+                    ? 'border-[#8EFD47]/60 shadow-[0_0_10px_rgba(142,253,71,0.2)]' 
+                    : 'text-bolt-elements-item-contentDefault border-transparent',
                 )}
                 onClick={() => {
                   props.setChatMode?.(props.chatMode === 'discuss' ? 'build' : 'discuss');

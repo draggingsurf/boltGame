@@ -22,12 +22,12 @@ export const DialogButton = memo(({ type, children, onClick, disabled }: DialogB
   return (
     <button
       className={classNames(
-        'inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors',
+        'inline-flex items-center gap-2 px-4 py-2 text-sm glass-button',
         type === 'primary'
-          ? 'bg-purple-500 text-white hover:bg-purple-600 dark:bg-purple-500 dark:hover:bg-purple-600'
+          ? 'text-[#8EFD47] hover:text-white hover:border-[#8EFD47] hover:shadow-[0_0_20px_rgba(142,253,71,0.3)]'
           : type === 'secondary'
-            ? 'bg-transparent text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-100'
-            : 'bg-transparent text-red-500 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10',
+            ? 'text-bolt-elements-textSecondary hover:text-bolt-elements-textPrimary'
+            : 'text-red-400 border-red-500/40 hover:border-red-400 hover:shadow-[0_0_20px_rgba(239,68,68,0.3)]',
       )}
       onClick={onClick}
       disabled={disabled}
@@ -116,7 +116,7 @@ export const Dialog = memo(({ children, className, showCloseButton = true, onClo
       <RadixDialog.Content asChild>
         <motion.div
           className={classNames(
-            'fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-gray-950 rounded-lg shadow-xl border border-bolt-elements-borderColor z-[9999] w-[520px] focus:outline-none',
+            'fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 glass-panel z-[9999] w-[520px] focus:outline-none',
             className,
           )}
           initial="closed"

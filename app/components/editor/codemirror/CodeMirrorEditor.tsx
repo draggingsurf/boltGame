@@ -313,7 +313,7 @@ export const CodeMirrorEditor = memo(
     return (
       <div className={classNames('relative h-full', className)}>
         {doc?.isBinary && <BinaryContent />}
-        <div className="h-full overflow-hidden" ref={containerRef} />
+        <div className="h-full overflow-hidden cyber-border" ref={containerRef} />
       </div>
     );
   },

@@ -1,0 +1,14 @@
+<svg width="350" height="100" viewBox="0 0 350 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Green G+ logo -->
+  <g transform="translate(20, 20)">
+    <!-- Main G shape -->
+    <path d="M0 30 C0 13.4 13.4 0 30 0 L45 0 L45 15 L30 15 C21.7 15 15 21.7 15 30 L15 30 C15 38.3 21.7 45 30 45 L37.5 45 L37.5 30 L30 30 L30 22.5 L52.5 22.5 L52.5 45 C52.5 53.3 45.8 60 37.5 60 L30 60 C13.4 60 0 46.6 0 30 Z" fill="#8EFD47"/>
+    <!-- Plus sign -->
+    <rect x="40" y="25" width="15" height="5" fill="#8EFD47"/>
+    <rect x="45" y="20" width="5" height="15" fill="#8EFD47"/>
+  </g>
+  
+  <!-- GameTerminal text -->
+  <text x="100" y="45" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#8EFD47">GameTerminal</text>
+  <text x="100" y="65" font-family="Arial, sans-serif" font-size="14" fill="#8EFD47">Multiple Games, One Platform</text>
+</svg>

@@ -17,9 +17,9 @@ body {
 
 :root {
   --gradient-opacity: 0.8;
-  --primary-color: rgba(16, 185, 129, var(--gradient-opacity));     // emerald-500
-  --secondary-color: rgba(5, 150, 105, var(--gradient-opacity));    // emerald-600
-  --accent-color: rgba(52, 211, 153, var(--gradient-opacity));      // emerald-400
+  --primary-color: rgba(142, 253, 71, var(--gradient-opacity));     // #8EFD47
+  --secondary-color: rgba(128, 228, 64, var(--gradient-opacity));   // darker shade of #8EFD47
+  --accent-color: rgba(142, 253, 71, var(--gradient-opacity));      // #8EFD47
   // Old purple colors commented out
   // --primary-color: rgba(158, 117, 240, var(--gradient-opacity));
   // --secondary-color: rgba(138, 43, 226, var(--gradient-opacity));
@@ -79,6 +79,109 @@ body {
   --bolt-elements-textTertiary: rgba(148, 163, 184, 0.7);  // slate-400
   
   // Green accent colors
-  --bolt-elements-borderColor: rgba(16, 185, 129, 0.3);    // emerald-500 with transparency
-  --bolt-elements-borderColorActive: rgba(52, 211, 153, 0.8); // emerald-400
+  --bolt-elements-borderColor: rgba(142, 253, 71, 0.3);    // #8EFD47 with transparency
+  --bolt-elements-borderColorActive: rgba(142, 253, 71, 0.8); // #8EFD47
+}
+
+/* Glassmorphic Utility Classes */
+.glass-panel {
+  background: var(--glass-background);
+  border: var(--glass-border);
+  border-radius: var(--glass-border-radius);
+  backdrop-filter: var(--glass-backdrop-blur);
+  box-shadow: var(--glass-box-shadow);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-panel:hover {
+  background: var(--glass-background-hover);
+  box-shadow: var(--glass-box-shadow-hover);
+}
+
+.glass-button {
+  background: var(--glass-background);
+  border: var(--glass-border);
+  border-radius: var(--glass-border-radius);
+  backdrop-filter: var(--glass-backdrop-blur);
+  box-shadow: var(--glass-box-shadow);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-button:hover {
+  background: var(--glass-background-hover);
+  border: var(--glass-border-glow);
+  box-shadow: var(--glass-neon-glow);
+  transform: translateY(-1px);
+}
+
+.glass-input {
+  background: var(--glass-background);
+  border: var(--glass-input-border);
+  border-bottom: var(--glass-input-border-bottom);
+  border-radius: var(--glass-border-radius);
+  backdrop-filter: var(--glass-backdrop-blur);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-input:focus {
+  border: var(--glass-input-border-focus);
+  box-shadow: var(--glass-neon-glow);
+  outline: none;
+}
+
+.cyber-border {
+  border: var(--cyber-border-dashed);
+  border-radius: var(--glass-border-radius);
+  background: var(--glass-background);
+  backdrop-filter: var(--glass-backdrop-blur);
+}
+
+.glass-border-glow {
+  animation: borderGlow 3s ease-in-out infinite alternate;
+}
+
+.glass-loading {
+  animation: glassLoading 2s ease-in-out infinite;
+}
+
+.glass-pulse {
+  animation: glassPulse 1.5s ease-in-out infinite;
+}
+
+.glass-hover-scale {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-hover-scale:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--glass-box-shadow-hover);
+  border-color: rgba(0, 255, 208, 0.8);
+}
+
+@keyframes borderGlow {
+  0% { border-color: rgba(0, 255, 255, 0.2); }
+  100% { border-color: rgba(0, 255, 255, 0.6); }
+}
+
+@keyframes glassLoading {
+  0%, 100% { 
+    background: var(--glass-background);
+    border-color: rgba(0, 255, 255, 0.2);
+  }
+  50% { 
+    background: var(--glass-background-hover);
+    border-color: rgba(0, 255, 208, 0.4);
+    box-shadow: 0 4px 20px rgba(0, 255, 255, 0.15);
+  }
+}
+
+@keyframes glassPulse {
+  0%, 100% { 
+    transform: scale(1);
+    box-shadow: var(--glass-box-shadow);
+  }
+  50% { 
+    transform: scale(1.01);
+    box-shadow: var(--glass-box-shadow-hover);
+  }
 }

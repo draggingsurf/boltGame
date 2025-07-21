@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Dynamic Asset Loading Demo</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #1a1a1a;
+            color: white;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .game-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .info-panel {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .asset-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .asset-card {
+            background: #3a3a3a;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .asset-preview {
+            width: 64px;
+            height: 64px;
+            background: #4a4a4a;
+            margin: 0 auto 10px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .asset-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .controls {
+            margin: 20px 0;
+            text-align: center;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .status.success {
+            background: #4CAF50;
+        }
+        .status.error {
+            background: #f44336;
+        }
+        .status.info {
+            background: #2196F3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 Dynamic Asset Loading System Demo</h1>
+        
+        <div class="info-panel">
+            <h2>System Status</h2>
+            <div id="status">Loading...</div>
+            <div id="asset-stats"></div>
+        </div>
+
+        <div class="controls">
+            <button onclick="loadBasicAssets()">Load Basic Game Assets</button>
+            <button onclick="loadCharacterAssets()">Load Character Variants</button>
+            <button onclick="loadEnemyAssets()">Load Enemy Types</button>
+            <button onclick="loadTerrainAssets()">Load Terrain Tiles</button>
+            <button onclick="searchAssets()">Search Assets</button>
+        </div>
+
+        <div class="game-container">
+            <div id="phaser-game"></div>
+        </div>
+
+        <div id="asset-showcase" class="asset-grid">
+            <!-- Assets will be displayed here -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.js"></script>
+    <script type="module">
+        // Asset Loader Implementation
+        class AssetLoader {
+            constructor() {
+                this.manifest = null;
+                this.cache = new Map();
+                this.baseUrl = "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/";
+            }
+
+            async loadManifest() {
+                if (this.manifest) return this.manifest;
+
+                try {
+                    const response = await fetch('./public/game-asset-manifest.json');
+                    if (response.ok) {
+                        this.manifest = await response.json();
+                        return this.manifest;
+                    }
+                } catch (error) {
+                    console.warn('Could not load local manifest, using fallback');
+                }
+
+                this.manifest = this.createFallbackManifest();
+                return this.manifest;
+            }
+
+            createFallbackManifest() {
+                return {
+                    version: "1.0.0",
+                    generated_at: new Date().toISOString(),
+                    base_url: this.baseUrl,
+                    assets: [
+                        {
+                            id: "fallback-player",
+                            name: "Character Beige Idle",
+                            url: `${this.baseUrl}platformer/sprites/characters/character_beige_idle.png`,
+                            category: "sprites",
+                            subcategory: "characters",
+                            tags: ["beige", "idle", "characters"],
+                            file_type: "png"
+                        },
+                        {
+                            id: "fallback-enemy",
+                            name: "Slime Block Rest",
+                            url: `${this.baseUrl}platformer/sprites/enemies/slime_block_rest.png`,
+                            category: "sprites",
+                            subcategory: "enemies",
+                            tags: ["slime", "enemies"],
+                            file_type: "png"
+                        }
+                    ],
+                    search_index: {}
+                };
+            }
+
+            async searchAssets(criteria = {}) {
+                const manifest = await this.loadManifest();
+                if (!manifest) return [];
+
+                let results = manifest.assets;
+
+                if (criteria.category) {
+                    results = results.filter(asset => 
+                        asset.category?.toLowerCase() === criteria.category.toLowerCase()
+                    );
+                }
+
+                if (criteria.subcategory) {
+                    results = results.filter(asset => 
+                        asset.subcategory?.toLowerCase() === criteria.subcategory.toLowerCase()
+                    );
+                }
+
+                if (criteria.tags && criteria.tags.length > 0) {
+                    results = results.filter(asset => {
+                        if (!asset.tags || asset.tags.length === 0) return false;
+                        return criteria.tags.every(tag => 
+                            asset.tags.some(assetTag => assetTag.toLowerCase() === tag.toLowerCase())
+                        );
+                    });
+                }
+
+                if (criteria.name) {
+                    results = results.filter(asset => 
+                        asset.name.toLowerCase().includes(criteria.name.toLowerCase())
+                    );
+                }
+
+                if (criteria.limit && criteria.limit > 0) {
+                    results = results.slice(0, criteria.limit);
+                }
+
+                return results;
+            }
+
+            async getAssetUrl(criteria, fallbackUrl) {
+                const cacheKey = JSON.stringify(criteria);
+                
+                if (this.cache.has(cacheKey)) {
+                    return this.cache.get(cacheKey);
+                }
+
+                const assets = await this.searchAssets({ ...criteria, limit: 1 });
+                const url = assets.length > 0 ? assets[0].url : fallbackUrl || null;
+                
+                if (url) {
+                    this.cache.set(cacheKey, url);
+                }
+
+                return url;
+            }
+
+            async getPlayerSprite(color = 'beige', animation = 'idle') {
+                return this.getAssetUrl({
+                    subcategory: 'characters',
+                    tags: [color, animation]
+                });
+            }
+
+            async getEnemySprite(enemyType = 'slime') {
+                return this.getAssetUrl({
+                    subcategory: 'enemies',
+                    tags: [enemyType]
+                });
+            }
+
+            async getTileSprite(tileType = 'grass') {
+                return this.getAssetUrl({
+                    subcategory: 'tiles',
+                    tags: [tileType]
+                });
+            }
+        }
+
+        // Initialize the asset loader
+        const assetLoader = new AssetLoader();
+
+        // Phaser Game Scene
+        class DemoScene extends Phaser.Scene {
+            constructor() {
+                super({ key: 'DemoScene' });
+                this.loadedAssets = [];
+            }
+
+            async preload() {
+                // Show loading text
+                this.loadingText = this.add.text(400, 300, 'Loading dynamic assets...', {
+                    fontSize: '24px',
+                    fill: '#ffffff'
+                }).setOrigin(0.5);
+
+                // Load basic assets dynamically
+                await this.loadBasicAssets();
+            }
+
+            async loadBasicAssets() {
+                try {
+                    const playerUrl = await assetLoader.getPlayerSprite('beige', 'idle');
+                    const enemyUrl = await assetLoader.getEnemySprite('slime');
+                    const tileUrl = await assetLoader.getTileSprite('grass');
+
+                    if (playerUrl) this.load.image('player', playerUrl);
+                    if (enemyUrl) this.load.image('enemy', enemyUrl);
+                    if (tileUrl) this.load.image('ground', tileUrl);
+
+                    this.loadedAssets = ['player', 'enemy', 'ground'];
+                } catch (error) {
+                    console.error('Failed to load dynamic assets:', error);
+                }
+            }
+
+            create() {
+                // Remove loading text
+                if (this.loadingText) {
+                    this.loadingText.destroy();
+                }
+
+                // Create game objects using dynamically loaded assets
+                if (this.textures.exists('player')) {
+                    this.player = this.add.sprite(200, 300, 'player').setScale(2);
+                }
+
+                if (this.textures.exists('enemy')) {
+                    this.enemy = this.add.sprite(400, 300, 'enemy').setScale(2);
+                }
+
+                if (this.textures.exists('ground')) {
+                    for (let x = 0; x < 800; x += 64) {
+                        this.add.sprite(x + 32, 500, 'ground');
+                    }
+                }
+
+                // Add success message
+                this.add.text(400, 100, '🎉 Dynamic Assets Loaded Successfully!', {
+                    fontSize: '24px',
+                    fill: '#4CAF50'
+                }).setOrigin(0.5);
+
+                this.add.text(400, 140, 'Assets loaded from Supabase with 1000+ professional sprites', {
+                    fontSize: '16px',
+                    fill: '#ffffff'
+                }).setOrigin(0.5);
+            }
+        }
+
+        // Initialize Phaser game
+        const config = {
+            type: Phaser.AUTO,
+            width: 800,
+            height: 600,
+            parent: 'phaser-game',
+            backgroundColor: '#87CEEB',
+            scene: DemoScene
+        };
+
+        const game = new Phaser.Game(config);
+
+        // UI Functions
+        async function updateStatus() {
+            const statusDiv = document.getElementById('status');
+            const statsDiv = document.getElementById('asset-stats');
+
+            try {
+                const manifest = await assetLoader.loadManifest();
+                
+                statusDiv.innerHTML = `
+                    <div class="status success">
+                        ✅ Dynamic Asset System Active<br>
+                        📦 Manifest Version: ${manifest.version}<br>
+                        📅 Generated: ${new Date(manifest.generated_at).toLocaleString()}<br>
+                        🔗 Base URL: ${manifest.base_url}
+                    </div>
+                `;
+
+                // Calculate stats
+                const categories = {};
+                manifest.assets.forEach(asset => {
+                    const key = asset.subcategory || 'other';
+                    categories[key] = (categories[key] || 0) + 1;
+                });
+
+                const statsHtml = Object.entries(categories)
+                    .map(([category, count]) => `<strong>${category}:</strong> ${count}`)
+                    .join(' | ');
+
+                statsDiv.innerHTML = `
+                    <div class="status info">
+                        📊 Asset Statistics: ${manifest.assets.length} total assets<br>
+                        ${statsHtml}
+                    </div>
+                `;
+
+            } catch (error) {
+                statusDiv.innerHTML = `
+                    <div class="status error">
+                        ❌ Failed to load asset system: ${error.message}
+                    </div>
+                `;
+            }
+        }
+
+        async function displayAssets(assets, title) {
+            const showcase = document.getElementById('asset-showcase');
+            
+            const titleHtml = `<div style="grid-column: 1 / -1; text-align: center; font-size: 24px; margin: 20px 0;">${title}</div>`;
+            
+            const assetsHtml = assets.map(asset => `
+                <div class="asset-card">
+                    <div class="asset-preview">
+                        <img src="${asset.url}" alt="${asset.name}" onerror="this.style.display='none'">
+                    </div>
+                    <div><strong>${asset.name}</strong></div>
+                    <div style="font-size: 12px; color: #ccc;">${asset.subcategory}</div>
+                    <div style="font-size: 10px; color: #999;">${asset.tags.join(', ')}</div>
+                </div>
+            `).join('');
+
+            showcase.innerHTML = titleHtml + assetsHtml;
+        }
+
+        // Global functions for buttons
+        window.loadBasicAssets = async function() {
+            const assets = await Promise.all([
+                assetLoader.searchAssets({ subcategory: 'characters', limit: 6 }),
+                assetLoader.searchAssets({ subcategory: 'enemies', limit: 6 }),
+                assetLoader.searchAssets({ subcategory: 'tiles', limit: 6 })
+            ]);
+            
+            const allAssets = [...assets[0], ...assets[1], ...assets[2]];
+            await displayAssets(allAssets, '🎮 Basic Game Assets');
+        };
+
+        window.loadCharacterAssets = async function() {
+            const assets = await assetLoader.searchAssets({ 
+                subcategory: 'characters', 
+                limit: 12 
+            });
+            await displayAssets(assets, '👤 Character Variants');
+        };
+
+        window.loadEnemyAssets = async function() {
+            const assets = await assetLoader.searchAssets({ 
+                subcategory: 'enemies', 
+                limit: 12 
+            });
+            await displayAssets(assets, '👹 Enemy Types');
+        };
+
+        window.loadTerrainAssets = async function() {
+            const assets = await assetLoader.searchAssets({ 
+                subcategory: 'tiles', 
+                limit: 12 
+            });
+            await displayAssets(assets, '🧱 Terrain Tiles');
+        };
+
+        window.searchAssets = async function() {
+            const query = prompt('Search for assets (e.g., "coin", "grass", "beige"):');
+            if (query) {
+                const assets = await assetLoader.searchAssets({ 
+                    name: query, 
+                    limit: 12 
+                });
+                await displayAssets(assets, `🔍 Search Results for "${query}"`);
+            }
+        };
+
+        // Initialize the demo
+        updateStatus();
+        loadBasicAssets();
+    </script>
+</body>
+</html>

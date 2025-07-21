@@ -351,7 +351,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                 <h1 className="text-3xl lg:text-6xl font-bold text-bolt-elements-textPrimary mb-4 animate-fade-in">
                   Build Worlds, Skip the
                   <br />
-                  <span className="text-emerald-400">
+                  <span className="text-[#8EFD47]">
                     &lt;<span className="relative inline-block">
                       Code
                       <span className="absolute top-1/2 left-0 w-full h-0.5 bg-red-500 transform -translate-y-1/2"></span>

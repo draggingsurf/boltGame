@@ -201,7 +201,7 @@ export const TerminalTabs = memo(() => {
                 <Terminal
                   key={index}
                   id={`terminal_${index}`}
-                  className={classNames('h-full overflow-hidden modern-scrollbar-invert', {
+                  className={classNames('h-full overflow-hidden modern-scrollbar-invert cyber-border', {
                     hidden: !isActive,
                   })}
                   ref={(ref) => {
@@ -217,7 +217,7 @@ export const TerminalTabs = memo(() => {
                 <Terminal
                   key={index}
                   id={`terminal_${index}`}
-                  className={classNames('modern-scrollbar h-full overflow-hidden', {
+                  className={classNames('modern-scrollbar h-full overflow-hidden cyber-border', {
                     hidden: !isActive,
                   })}
                   ref={(ref) => {

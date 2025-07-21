@@ -84,9 +84,9 @@ const LogEntryItem = ({ log, isExpanded: forceExpanded, use24Hour, showTimestamp
     if (log.category === 'provider') {
       return {
         icon: 'i-ph:robot',
-        color: 'text-emerald-500 dark:text-emerald-400',
-        bg: 'hover:bg-emerald-500/10 dark:hover:bg-emerald-500/20',
-        badge: 'text-emerald-500 bg-emerald-50 dark:bg-emerald-500/10',
+        color: 'text-[#8EFD47] dark:text-[#8EFD47]',
+        bg: 'hover:bg-[#8EFD47]/10 dark:hover:bg-[#8EFD47]/20',
+        badge: 'text-[#8EFD47] bg-[#8EFD47]/10 dark:bg-[#8EFD47]/10',
       };
     }
 

@@ -25,6 +25,7 @@ import { workbenchStore } from '~/lib/stores/workbench';
 import { Search } from './Search'; // <-- Ensure Search is imported
 import { classNames } from '~/utils/classNames'; // <-- Import classNames if not already present
 import { LockManager } from './LockManager'; // <-- Import LockManager
+import { CodeGenerationOverlay } from './CodeGenerationOverlay';
 
 interface EditorPanelProps {
   files?: FileMap;
@@ -84,7 +85,7 @@ export const EditorPanel = memo(
       <PanelGroup direction="vertical">
         <Panel defaultSize={showTerminal ? DEFAULT_EDITOR_SIZE : 100} minSize={20}>
           <PanelGroup direction="horizontal">
-            <Panel defaultSize={20} minSize={15} collapsible className="border-r border-bolt-elements-borderColor">
+            <Panel defaultSize={20} minSize={15} collapsible className="glass-panel border-r-0">
               <div className="h-full">
                 <Tabs.Root defaultValue="files" className="flex flex-col h-full">
                   <PanelHeader className="w-full text-sm font-medium text-bolt-elements-textSecondary px-1">
@@ -93,7 +94,7 @@ export const EditorPanel = memo(
                         <Tabs.Trigger
                           value="files"
                           className={classNames(
-                            'h-full bg-transparent hover:bg-bolt-elements-background-depth-3 py-0.5 px-2 rounded-lg text-sm font-medium text-bolt-elements-textTertiary hover:text-bolt-elements-textPrimary data-[state=active]:text-bolt-elements-textPrimary',
+                            'h-full glass-button border-transparent backdrop-filter-none bg-transparent shadow-none py-0.5 px-2 text-sm font-medium text-bolt-elements-textTertiary hover:text-bolt-elements-textPrimary data-[state=active]:text-[#8EFD47] data-[state=active]:border-[#8EFD47]/60',
                           )}
                         >
                           Files
@@ -101,7 +102,7 @@ export const EditorPanel = memo(
                         <Tabs.Trigger
                           value="search"
                           className={classNames(
-                            'h-full bg-transparent hover:bg-bolt-elements-background-depth-3 py-0.5 px-2 rounded-lg text-sm font-medium text-bolt-elements-textTertiary hover:text-bolt-elements-textPrimary data-[state=active]:text-bolt-elements-textPrimary',
+                            'h-full glass-button border-transparent backdrop-filter-none bg-transparent shadow-none py-0.5 px-2 text-sm font-medium text-bolt-elements-textTertiary hover:text-bolt-elements-textPrimary data-[state=active]:text-[#8EFD47] data-[state=active]:border-[#8EFD47]/60',
                           )}
                         >
                           Search
@@ -174,6 +175,7 @@ export const EditorPanel = memo(
                   onChange={onEditorChange}
                   onSave={onFileSave}
                 />
+                <CodeGenerationOverlay isVisible={isStreaming || false} />
               </div>
             </Panel>
           </PanelGroup>
