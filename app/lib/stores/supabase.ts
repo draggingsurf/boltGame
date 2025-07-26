@@ -169,16 +169,14 @@ export async function fetchProjectApiKeys(projectId: string, token: string) {
     const anonKey = apiKeys.find((key: SupabaseApiKey) => key.name === 'anon' || key.name === 'public');
 
     if (anonKey) {
-      const supabaseUrl = `https://${projectId}.supabase.co`;
-
       updateSupabaseConnection({
         credentials: {
           anonKey: anonKey.api_key,
-          supabaseUrl,
+          supabaseUrl: `https://${projectId}.supabase.co`,
         },
       });
 
-      return { anonKey: anonKey.api_key, supabaseUrl };
+      return { anonKey: anonKey.api_key, supabaseUrl: `https://${projectId}.supabase.co` };
     }
 
     return null;
@@ -189,3 +187,4 @@ export async function fetchProjectApiKeys(projectId: string, token: string) {
     isFetchingApiKeys.set(false);
   }
 }
+

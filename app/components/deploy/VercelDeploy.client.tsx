@@ -7,6 +7,7 @@ import { path } from '~/utils/path';
 import { useState } from 'react';
 import type { ActionCallbackData } from '~/lib/runtime/message-parser';
 import { chatId } from '~/lib/persistence/useChatHistory';
+import { DEPLOYMENT_CONFIG } from '~/lib/constants/deployment';
 
 export function useVercelDeploy() {
   const [isDeploying, setIsDeploying] = useState(false);
@@ -187,20 +188,46 @@ export function useVercelDeploy() {
           sourceFiles: allProjectFiles,
           token: vercelConn.token,
           chatId: currentChatId,
+          customDomain: DEPLOYMENT_CONFIG.CUSTOM_DOMAIN, // Use constant instead of hardcoded
         }),
       });
 
       const data = (await response.json()) as any;
 
-      if (!response.ok || !data.deploy || !data.project) {
-        console.error('Invalid deploy response:', data);
+      if (!response.ok) {
+        console.error('Deployment API error:', data);
+        
+        // Provide specific error messages based on the error type
+        let errorMessage = 'Deployment failed';
+        if (data.error) {
+          if (data.error.includes('DEPLOYMENT_NOT_FOUND')) {
+            errorMessage = 'Deployment not found. This may be a temporary issue - please try again.';
+          } else if (data.error.includes('timed out')) {
+            errorMessage = 'Deployment timed out. The project may still be deploying in the background.';
+          } else if (data.error.includes('Invalid deployment response')) {
+            errorMessage = 'Deployment creation failed. Please check your Vercel account and try again.';
+          } else {
+            errorMessage = `Deployment failed: ${data.error}`;
+          }
+        }
 
         // Notify that deployment failed
         deployArtifact.runner.handleDeployAction('deploying', 'failed', {
-          error: data.error || 'Invalid deployment response',
+          error: errorMessage,
           source: 'vercel',
         });
-        throw new Error(data.error || 'Invalid deployment response');
+        throw new Error(errorMessage);
+      }
+
+      if (!data.deploy || !data.project) {
+        console.error('Invalid deploy response structure:', data);
+
+        // Notify that deployment failed
+        deployArtifact.runner.handleDeployAction('deploying', 'failed', {
+          error: 'Invalid deployment response - missing required data',
+          source: 'vercel',
+        });
+        throw new Error('Invalid deployment response - missing required data');
       }
 
       if (data.project) {

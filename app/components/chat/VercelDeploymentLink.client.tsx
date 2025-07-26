@@ -3,6 +3,7 @@ import { vercelConnection } from '~/lib/stores/vercel';
 import { chatId } from '~/lib/persistence/useChatHistory';
 import * as Tooltip from '@radix-ui/react-tooltip';
 import { useEffect, useState } from 'react';
+import { DEPLOYMENT_CONFIG } from '~/lib/constants/deployment';
 
 export function VercelDeploymentLink() {
   const connection = useStore(vercelConnection);
@@ -45,11 +46,13 @@ export function VercelDeploymentLink() {
         // Extract the chat number from currentChatId
         const chatNumber = currentChatId.split('-')[0];
 
-        // Find project by matching the chat number in the name
-        const project = projects.find((p: { name: string | string[] }) => p.name.includes(`bolt-diy-${chatNumber}`));
+        // Find project by matching the chat number in the name (check both old and new naming)
+        const project = projects.find((p: { name: string | string[] }) => 
+          p.name.includes(`bolt-diy-${chatNumber}`) || p.name.includes(`${DEPLOYMENT_CONFIG.PROJECT_PREFIX}-${chatNumber}`)
+        );
 
         if (project) {
-          // Fetch project details including deployments
+          // First check for custom domains (gameterminal.io subdomains)
           const projectDetailsResponse = await fetch(`https://api.vercel.com/v9/projects/${project.id}`, {
             headers: {
               Authorization: `Bearer ${connection.token}`,
@@ -61,9 +64,19 @@ export function VercelDeploymentLink() {
           if (projectDetailsResponse.ok) {
             const projectDetails = (await projectDetailsResponse.json()) as any;
 
-            // Try to get URL from production aliases first
+            // Check for custom domains first (gameterminal.io)
             if (projectDetails.targets?.production?.alias && projectDetails.targets.production.alias.length > 0) {
-              // Find the clean URL (without -projects.vercel.app)
+              // Look for gameterminal.io domain first
+              const customDomain = projectDetails.targets.production.alias.find(
+                (a: string) => a.includes(DEPLOYMENT_CONFIG.CUSTOM_DOMAIN)
+              );
+
+              if (customDomain) {
+                setDeploymentUrl(`https://${customDomain}`);
+                return;
+              }
+
+              // Fallback to clean vercel.app URL
               const cleanUrl = projectDetails.targets.production.alias.find(
                 (a: string) => a.endsWith('.vercel.app') && !a.includes('-projects.vercel.app'),
               );
@@ -106,15 +119,21 @@ export function VercelDeploymentLink() {
           method: 'GET',
         });
 
+        if (fallbackResponse.ok) {
         const data = await fallbackResponse.json();
 
         if ((data as { deploy?: { url?: string } }).deploy?.url) {
           setDeploymentUrl((data as { deploy: { url: string } }).deploy.url);
         } else if ((data as { project?: { url?: string } }).project?.url) {
           setDeploymentUrl((data as { project: { url: string } }).project.url);
+          }
+        } else {
+          // If fallback API call fails, log the error but don't throw
+          console.warn('Fallback deployment fetch failed:', fallbackResponse.status);
         }
       } catch (err) {
         console.error('Error fetching Vercel deployment:', err);
+        // Don't show error to user for deployment link issues
       } finally {
         setIsLoading(false);
       }

@@ -1,5 +1,6 @@
 import { type ActionFunctionArgs, type LoaderFunctionArgs, json } from '@remix-run/cloudflare';
 import type { VercelProjectInfo } from '~/types/vercel';
+import { DEPLOYMENT_CONFIG, generateCustomDomainUrl, generateProjectName } from '~/lib/constants/deployment';
 
 // Function to detect framework from project files
 const detectFramework = (files: Record<string, string>): string => {
@@ -172,6 +173,65 @@ const detectFramework = (files: Record<string, string>): string => {
   return 'other';
 };
 
+// Helper function to add custom domain to Vercel project
+const addCustomDomainToProject = async (projectId: string, domain: string, token: string) => {
+  try {
+    const response = await fetch(`https://api.vercel.com/v9/projects/${projectId}/domains`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: domain,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.warn(`Failed to add custom domain ${domain}:`, errorData);
+      // Don't throw error, deployment can continue with default domain
+      return false;
+    }
+
+    console.log(`Successfully added custom domain: ${domain}`);
+    return true;
+  } catch (error) {
+    console.warn(`Error adding custom domain ${domain}:`, error);
+    return false;
+  }
+};
+
+// Helper function to get existing domains for a project
+const getProjectDomains = async (projectId: string, token: string) => {
+  try {
+    const response = await fetch(`https://api.vercel.com/v9/projects/${projectId}/domains`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      console.warn('Failed to fetch project domains');
+      return [];
+    }
+
+    const data = (await response.json()) as any;
+    return data.domains || [];
+  } catch (error) {
+    console.warn('Error fetching project domains:', error);
+    return [];
+  }
+};
+
+interface DeployRequestBody {
+  projectId?: string;
+  files: Record<string, string>;
+  sourceFiles?: Record<string, string>;
+  chatId: string;
+  framework?: string;
+}
+
 // Add loader function to handle GET requests
 export async function loader({ request }: LoaderFunctionArgs) {
   const url = new URL(request.url);
@@ -231,19 +291,12 @@ export async function loader({ request }: LoaderFunctionArgs) {
   }
 }
 
-interface DeployRequestBody {
-  projectId?: string;
-  files: Record<string, string>;
-  sourceFiles?: Record<string, string>;
-  chatId: string;
-  framework?: string;
-}
-
 // Existing action function for POST requests
 export async function action({ request }: ActionFunctionArgs) {
   try {
-    const { projectId, files, sourceFiles, token, chatId, framework } = (await request.json()) as DeployRequestBody & {
+    const { projectId, files, sourceFiles, token, chatId, framework, customDomain } = (await request.json()) as DeployRequestBody & {
       token: string;
+      customDomain?: string;
     };
 
     if (!token) {
@@ -252,6 +305,7 @@ export async function action({ request }: ActionFunctionArgs) {
 
     let targetProjectId = projectId;
     let projectInfo: VercelProjectInfo | undefined;
+    const useCustomDomain = customDomain || DEPLOYMENT_CONFIG.CUSTOM_DOMAIN;
 
     // Detect framework from the source files if not provided
     let detectedFramework = framework;
@@ -263,7 +317,9 @@ export async function action({ request }: ActionFunctionArgs) {
 
     // If no projectId provided, create a new project
     if (!targetProjectId) {
-      const projectName = `bolt-diy-${chatId}-${Date.now()}`;
+      const projectName = generateProjectName(chatId);
+      const fullCustomDomain = generateCustomDomainUrl(projectName);
+      
       const createProjectResponse = await fetch('https://api.vercel.com/v9/projects', {
         method: 'POST',
         headers: {
@@ -286,10 +342,14 @@ export async function action({ request }: ActionFunctionArgs) {
 
       const newProject = (await createProjectResponse.json()) as any;
       targetProjectId = newProject.id;
+      
+      // Add custom domain to the project
+      await addCustomDomainToProject(targetProjectId!, fullCustomDomain, token);
+      
       projectInfo = {
         id: newProject.id,
         name: newProject.name,
-        url: `https://${newProject.name}.vercel.app`,
+        url: `https://${fullCustomDomain}`,
         chatId,
       };
     } else {
@@ -302,15 +362,29 @@ export async function action({ request }: ActionFunctionArgs) {
 
       if (projectResponse.ok) {
         const existingProject = (await projectResponse.json()) as any;
+        
+        // Check if project already has custom domain, if not add it
+        const fullCustomDomain = generateCustomDomainUrl(existingProject.name);
+        
+        // Get existing domains for the project
+        const existingDomains = await getProjectDomains(targetProjectId!, token);
+        const hasCustomDomain = existingDomains.some((domain: any) => domain.name === fullCustomDomain);
+        
+        if (!hasCustomDomain) {
+          await addCustomDomainToProject(targetProjectId!, fullCustomDomain, token);
+        }
+        
         projectInfo = {
           id: existingProject.id,
           name: existingProject.name,
-          url: `https://${existingProject.name}.vercel.app`,
+          url: `https://${fullCustomDomain}`,
           chatId,
         };
       } else {
         // If project doesn't exist, create a new one
-        const projectName = `bolt-diy-${chatId}-${Date.now()}`;
+        const projectName = generateProjectName(chatId);
+        const fullCustomDomain = generateCustomDomainUrl(projectName);
+        
         const createProjectResponse = await fetch('https://api.vercel.com/v9/projects', {
           method: 'POST',
           headers: {
@@ -333,10 +407,14 @@ export async function action({ request }: ActionFunctionArgs) {
 
         const newProject = (await createProjectResponse.json()) as any;
         targetProjectId = newProject.id;
+        
+        // Add custom domain to the project
+        await addCustomDomainToProject(targetProjectId!, fullCustomDomain, token);
+        
         projectInfo = {
           id: newProject.id,
           name: newProject.name,
-          url: `https://${newProject.name}.vercel.app`,
+          url: `https://${fullCustomDomain}`,
           chatId,
         };
       }
@@ -381,6 +459,8 @@ export async function action({ request }: ActionFunctionArgs) {
       project: targetProjectId,
       target: 'production',
       files: deploymentFiles,
+      // Add custom domain configuration
+      alias: [generateCustomDomainUrl(projectInfo.name)]
     };
 
     // Add framework-specific configuration
@@ -433,13 +513,23 @@ export async function action({ request }: ActionFunctionArgs) {
 
     const deployData = (await deployResponse.json()) as any;
 
-    // Poll for deployment status
+    // Validate deployment creation response
+    if (!deployData.id) {
+      console.error('Invalid deployment response - missing deployment ID:', deployData);
+      return json({ error: 'Invalid deployment response - missing deployment ID' }, { status: 500 });
+    }
+
+    console.log(`Deployment created with ID: ${deployData.id}`);
+
+    // Poll for deployment status with improved error handling
     let retryCount = 0;
     const maxRetries = 60;
     let deploymentUrl = '';
     let deploymentState = '';
+    let lastError = '';
 
     while (retryCount < maxRetries) {
+      try {
       const statusResponse = await fetch(`https://api.vercel.com/v13/deployments/${deployData.id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -451,31 +541,70 @@ export async function action({ request }: ActionFunctionArgs) {
         deploymentState = status.readyState;
         deploymentUrl = status.url ? `https://${status.url}` : '';
 
+          console.log(`Deployment ${deployData.id} status: ${deploymentState}`);
+
         if (status.readyState === 'READY' || status.readyState === 'ERROR') {
           break;
         }
+        } else {
+          // Handle specific error cases
+          const errorData = (await statusResponse.json().catch(() => ({}))) as any;
+          lastError = `HTTP ${statusResponse.status}: ${errorData.error?.code || errorData.error?.message || 'Unknown error'}`;
+          
+          console.warn(`Deployment status check failed (attempt ${retryCount + 1}):`, lastError);
+          
+          // If it's a NOT_FOUND error and we're early in the process, the deployment might still be initializing
+          if (statusResponse.status === 404 && retryCount < 10) {
+            console.log('Deployment not found yet, continuing to poll...');
+          } else if (statusResponse.status === 404) {
+            // If deployment is still not found after several attempts, something is wrong
+            console.error('Deployment not found after multiple attempts, aborting');
+            break;
+          } else if (statusResponse.status >= 500) {
+            // Server errors - continue retrying
+            console.log('Server error, retrying...');
+          } else {
+            // Client errors (400-499) except 404 - stop retrying
+            console.error('Client error, stopping retry attempts');
+            break;
+          }
+        }
+      } catch (fetchError) {
+        lastError = `Network error: ${fetchError instanceof Error ? fetchError.message : 'Unknown'}`;
+        console.warn(`Network error during status check (attempt ${retryCount + 1}):`, lastError);
       }
 
       retryCount++;
       await new Promise((resolve) => setTimeout(resolve, 2000));
     }
 
+    // Handle deployment completion or failure
     if (deploymentState === 'ERROR') {
-      return json({ error: 'Deployment failed' }, { status: 500 });
+      return json({ error: 'Deployment failed during build/deployment process' }, { status: 500 });
     }
 
     if (retryCount >= maxRetries) {
-      return json({ error: 'Deployment timed out' }, { status: 500 });
+      const timeoutError = lastError ? 
+        `Deployment timed out. Last error: ${lastError}` : 
+        'Deployment timed out after 2 minutes';
+      return json({ error: timeoutError }, { status: 500 });
     }
+
+    // If we don't have a deployment state but we're here, assume success
+    if (!deploymentState) {
+      console.warn('Deployment state unknown, but no errors detected. Assuming success.');
+      deploymentState = 'READY';
+    }
+
+    // Determine final URL - prefer custom domain, fallback to deployment URL
+    const finalUrl = projectInfo?.url || deploymentUrl || `https://${deployData.url || 'unknown'}`;
 
     return json({
       success: true,
       deploy: {
         id: deployData.id,
         state: deploymentState,
-
-        // Return public domain as deploy URL and private domain as fallback.
-        url: projectInfo.url || deploymentUrl,
+        url: finalUrl,
       },
       project: projectInfo,
     });

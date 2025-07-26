@@ -112,16 +112,11 @@ Create a complete side-scrolling platformer game using **${engine === 'phaser' ?
 ## 🔧 Technical Requirements
 - **Game Engine:** ${engine === 'phaser' ? 'Phaser 3 (npm version)' : 'Canvas API with requestAnimationFrame'}
 - **Environment:** Bolt.new WebContainer
-- **Asset Handling:** Use pre-installed assets from \`/game-assets/\` directory
-- **No base64:** Always reference assets via file paths
+- **Asset Handling:** Standard asset loading
+- **Assets:** Use standard asset paths
 
 ## 📂 Project Structure
 \`\`\`
-/public/game-assets/     # Pre-installed Kenney assets
-  /sprites/              # player.png, enemy.png, coin.png
-  /tiles/                # ground.png, platform.png, brick.png
-  /backgrounds/          # sky.png, clouds.png
-  /audio/                # jump.mp3, coin.mp3, bgmusic.mp3
 /src/
   main.js               # Game initialization
   ${complexity !== 'simple' ? 'scenes/\n    Level1.js\n    Level2.js\n    GameOver.js' : ''}
@@ -150,24 +145,189 @@ ${complexity === 'complex' ? '- Multiple enemy types with advanced AI\n- Boss ba
 - **Power-ups:** ${complexity === 'simple' ? 'None initially' : complexity === 'medium' ? 'Speed boost, extra jump' : 'Multiple power-ups, inventory system'}
 - **Lives:** ${complexity === 'simple' ? '1 life (restart on death)' : '3 lives with respawn system'}
 
-## 📦 Asset References
-Use these exact paths in your ${engine === 'phaser' ? 'this.load.image()' : 'img.src'} calls:
+## 📦 Asset Loading
+Load your game assets in the preload function:
 
 \`\`\`javascript
 ${engine === 'phaser' ? `// In preload() function
-this.load.image('player', '/game-assets/sprites/player.png');
-this.load.image('enemy', '/game-assets/sprites/enemy.png');
-this.load.image('coin', '/game-assets/sprites/coin.png');
-this.load.image('ground', '/game-assets/tiles/ground.png');
-this.load.image('platform', '/game-assets/tiles/platform.png');
-this.load.image('sky', '/game-assets/backgrounds/sky.png');
-this.load.audio('jump', '/game-assets/audio/jump.mp3');
-this.load.audio('coin', '/game-assets/audio/coin.mp3');` : `// Canvas asset loading
-const playerImg = new Image();
-playerImg.src = '/game-assets/sprites/player.png';
-const groundImg = new Image();
-groundImg.src = '/game-assets/tiles/ground.png';`}
+preload() {
+  // Load your game assets
+  this.load.image('player', 'assets/player.png');
+  this.load.image('enemy', 'assets/enemy.png');
+  this.load.image('ground', 'assets/ground.png');
+}` : `// Canvas asset loading
+async loadAssets() {
+  // Load images
+  const playerImg = new Image();
+  playerImg.src = 'assets/player.png';
+  
+  const groundImg = new Image();
+  groundImg.src = 'assets/ground.png';
+}`}
 \`\`\`
+
+## 🎯 Win/Lose Conditions
+- **Win:** ${complexity === 'simple' ? 'Reach the end flag' : complexity === 'medium' ? 'Complete all levels' : 'Defeat final boss and complete all levels'}
+- **Lose:** Player falls off screen or touches enemy
+- **Restart:** ${complexity === 'simple' ? 'Reload page' : 'Return to menu or restart level'}
+
+## ⚡ Performance Requirements
+- Target 60fps gameplay
+- Smooth scrolling and animations
+- Responsive controls (no input lag)
+- Mobile-friendly touch controls
+
+## 🎨 Visual Style
+- Clean, readable pixel art style
+- Consistent color palette
+- Clear visual hierarchy (player, enemies, platforms)
+- Smooth animations for character movement
+
+## 📝 Implementation Notes
+${engine === 'phaser' ? `- Use Phaser's Arcade Physics for collision detection
+- Implement proper scene management for level transitions
+- Use object pooling for bullets/particles if needed
+- Follow Phaser best practices for scene lifecycle` : `- Implement custom collision detection
+- Use requestAnimationFrame for smooth animation
+- Handle keyboard input with proper event listeners
+- Manage game state with clean object structure`}
+
+## 🚀 Expected Output
+Generate complete, working code files that:
+1. Run immediately in Bolt.new after npm install
+2. Use the specified asset paths
+3. Implement all mentioned mechanics
+4. Include proper error handling
+5. Are well-commented and maintainable
+
+${complexity === 'complex' ? '**Note:** Due to complexity, consider generating this in 2-3 chunks if the output becomes too large.' : ''}
+
+Return all code files clearly labeled with markdown headers.`;
+
+  return basePrompt;
+}
+
+function generateShooterPrompt({ originalInput, complexity, engine }: any): string {
+  const basePrompt = `# 🎮 Build a ${originalInput} - Enhanced Shooter Game
+
+Create a complete shooter game using **${engine === 'phaser' ? 'Phaser 3' : 'Canvas API'}** that runs in Bolt.new.
+
+## 🔧 Technical Requirements
+- **Game Engine:** ${engine === 'phaser' ? 'Phaser 3 (npm version)' : 'Canvas API with requestAnimationFrame'}
+- **Environment:** Bolt.new WebContainer
+- **Asset Handling:** Standard asset loading
+- **Assets:** Use standard asset paths
+
+## 📦 Asset Loading
+Load your game assets in the preload function:
+
+\`\`\`javascript
+// In preload() function
+preload() {
+  // Load your game assets
+  this.load.image('player', 'assets/player.png');
+  this.load.image('enemy', 'assets/enemy.png');
+  this.load.image('bullet', 'assets/bullet.png');
+}
+\`\`\`
+
+- Load assets for player ship, enemy ships, projectiles, etc.
+- Implement proper sprite animations for explosions and effects
+
+## 🎯 Win/Lose Conditions
+- **Win:** ${complexity === 'simple' ? 'Reach the end flag' : complexity === 'medium' ? 'Complete all levels' : 'Defeat final boss and complete all levels'}
+- **Lose:** Player falls off screen or touches enemy
+- **Restart:** ${complexity === 'simple' ? 'Reload page' : 'Return to menu or restart level'}
+
+## ⚡ Performance Requirements
+- Target 60fps gameplay
+- Smooth scrolling and animations
+- Responsive controls (no input lag)
+- Mobile-friendly touch controls
+
+## 🎨 Visual Style
+- Clean, readable pixel art style
+- Consistent color palette
+- Clear visual hierarchy (player, enemies, platforms)
+- Smooth animations for character movement
+
+## 📝 Implementation Notes
+${engine === 'phaser' ? `- Use Phaser's Arcade Physics for collision detection
+- Implement proper scene management for level transitions
+- Use object pooling for bullets/particles if needed
+- Follow Phaser best practices for scene lifecycle` : `- Implement custom collision detection
+- Use requestAnimationFrame for smooth animation
+- Handle keyboard input with proper event listeners
+- Manage game state with clean object structure`}
+
+## 🚀 Expected Output
+Generate complete, working code files that:
+1. Run immediately in Bolt.new after npm install
+2. Use the specified asset paths
+3. Implement all mentioned mechanics
+4. Include proper error handling
+5. Are well-commented and maintainable
+
+${complexity === 'complex' ? '**Note:** Due to complexity, consider generating this in 2-3 chunks if the output becomes too large.' : ''}
+
+Return all code files clearly labeled with markdown headers.`;
+
+  return basePrompt;
+}
+
+function generatePuzzlePrompt({ originalInput, complexity, engine }: any): string {
+  return `# 🧩 Build a ${originalInput} - Puzzle Game
+
+Create a grid-based puzzle game using **${engine === 'phaser' ? 'Phaser 3' : 'Canvas API'}**.
+
+## 🎮 Core Mechanics
+- **Grid System:** ${complexity === 'simple' ? '8x8' : complexity === 'medium' ? '10x10' : '12x12 with variable sizes'}
+- **Input:** Mouse/touch to interact with pieces
+- **Goal:** ${complexity === 'simple' ? 'Clear lines or match colors' : 'Complex pattern matching and cascading effects'}
+
+Generate complete working puzzle logic with win/lose conditions.`;
+}
+
+function generateRunnerPrompt({ originalInput, complexity, engine }: any): string {
+  return `# 🏃 Build a ${originalInput} - Endless Runner Game
+
+Create an auto-scrolling runner game using **${engine === 'phaser' ? 'Phaser 3' : 'Canvas API'}**.
+
+## 🎮 Core Mechanics
+- **Auto-movement:** Player moves forward automatically
+- **Controls:** Jump, slide, or lane switching
+- **Obstacles:** Static and moving hazards
+- **Collectibles:** Coins and power-ups
+- **Increasing Speed:** Game gets faster over time
+
+Generate complete endless runner with obstacle generation.`;
+}
+
+function generateArcadePrompt({ originalInput, complexity, engine }: any): string {
+  const basePrompt = `# 🎮 Build a ${originalInput} - Arcade Game
+
+Create a complete arcade-style game using **${engine === 'phaser' ? 'Phaser 3' : 'Canvas API'}** that runs in Bolt.new.
+
+## 🔧 Technical Requirements
+- **Game Engine:** ${engine === 'phaser' ? 'Phaser 3 (npm version)' : 'Canvas API with requestAnimationFrame'}
+- **Environment:** Bolt.new WebContainer
+- **Asset Handling:** Standard asset loading
+- **Assets:** Use standard asset paths
+
+## 📦 Asset Loading
+Load your game assets in the preload function:
+
+\`\`\`javascript
+// In preload() function
+preload() {
+  // Load your game assets
+  this.load.image('tile', 'assets/tile.png');
+  this.load.image('background', 'assets/background.png');
+}
+\`\`\`
+
+- Load assets for all game sprites and backgrounds
+- Implement proper sprite animations for game elements
 
 ## 🎯 Win/Lose Conditions
 - **Win:** ${complexity === 'simple' ? 'Reach the end flag' : complexity === 'medium' ? 'Complete all levels' : 'Defeat final boss and complete all levels'}
@@ -208,70 +368,6 @@ ${complexity === 'complex' ? '**Note:** Due to complexity, consider generating t
 Return all code files clearly labeled with markdown headers.`;
 
   return basePrompt;
-}
-
-function generateShooterPrompt({ originalInput, complexity, engine }: any): string {
-  return `# 🚀 Build a ${originalInput} - Space Shooter Game
-
-Create a top-down or side-scrolling shooter game using **${engine === 'phaser' ? 'Phaser 3' : 'Canvas API'}**.
-
-## 🎮 Core Mechanics
-- **Player Ship:** Move with arrow keys, shoot with spacebar
-- **Enemies:** Spawn from edges, move toward player
-- **Projectiles:** Player bullets and enemy bullets
-- **Scoring:** Points for destroying enemies
-- **Difficulty:** Increasing enemy spawn rate
-
-## 📦 Assets
-- Use \`/game-assets/sprites/player.png\` for player ship
-- Use \`/game-assets/sprites/enemy.png\` for enemy ships
-- Use colored rectangles for bullets initially
-
-${complexity === 'complex' ? '## 🎯 Advanced Features\n- Multiple weapon types\n- Power-ups and upgrades\n- Boss battles with phases\n- Particle effects for explosions' : ''}
-
-Generate complete working code with proper collision detection and game loop.`;
-}
-
-function generatePuzzlePrompt({ originalInput, complexity, engine }: any): string {
-  return `# 🧩 Build a ${originalInput} - Puzzle Game
-
-Create a grid-based puzzle game using **${engine === 'phaser' ? 'Phaser 3' : 'Canvas API'}**.
-
-## 🎮 Core Mechanics
-- **Grid System:** ${complexity === 'simple' ? '8x8' : complexity === 'medium' ? '10x10' : '12x12 with variable sizes'}
-- **Input:** Mouse/touch to interact with pieces
-- **Goal:** ${complexity === 'simple' ? 'Clear lines or match colors' : 'Complex pattern matching and cascading effects'}
-
-Generate complete working puzzle logic with win/lose conditions.`;
-}
-
-function generateRunnerPrompt({ originalInput, complexity, engine }: any): string {
-  return `# 🏃 Build a ${originalInput} - Endless Runner Game
-
-Create an auto-scrolling runner game using **${engine === 'phaser' ? 'Phaser 3' : 'Canvas API'}**.
-
-## 🎮 Core Mechanics
-- **Auto-movement:** Player moves forward automatically
-- **Controls:** Jump, slide, or lane switching
-- **Obstacles:** Static and moving hazards
-- **Collectibles:** Coins and power-ups
-- **Increasing Speed:** Game gets faster over time
-
-Generate complete endless runner with obstacle generation.`;
-}
-
-function generateArcadePrompt({ originalInput, complexity, engine }: any): string {
-  return `# 🕹️ Build a ${originalInput} - Arcade Game
-
-Create a classic arcade-style game using **${engine === 'phaser' ? 'Phaser 3' : 'Canvas API'}**.
-
-## 🎮 Core Mechanics
-- **Simple Controls:** Easy to learn, hard to master
-- **Score System:** High score tracking
-- **Increasing Difficulty:** Progressive challenge
-- **Lives System:** Limited attempts
-
-Generate complete arcade game with classic feel and modern implementation.`;
 }
 
 // Export for use in system prompts
