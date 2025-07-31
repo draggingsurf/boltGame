@@ -29,7 +29,7 @@ export class PromptLibrary {
   > = {
     default: {
       label: 'Game Development Prompt',
-      description: 'Specialized prompt for HTML5 game development with built-in Kenney assets',
+      description: 'Specialized prompt for HTML5 game development',
       get: (options) => getSystemPrompt(options.cwd, options.supabase, options.designScheme),
     },
     original: {

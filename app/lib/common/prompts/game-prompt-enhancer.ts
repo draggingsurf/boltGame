@@ -112,14 +112,14 @@ Create a complete side-scrolling platformer game using **${engine === 'phaser' ?
 ## 🔧 Technical Requirements
 - **Game Engine:** ${engine === 'phaser' ? 'Phaser 3 (npm version)' : 'Canvas API with requestAnimationFrame'}
 - **Environment:** Bolt.new WebContainer
-- **Asset Handling:** Use pre-installed assets from \`/game-assets/\` directory
+- **Asset Handling:** Asset handling approach to be defined
 - **No base64:** Always reference assets via file paths
 
 ## 📂 Project Structure
 \`\`\`
-/public/game-assets/     # Pre-installed Kenney assets
-  /sprites/              # player.png, enemy.png, coin.png
-  /tiles/                # ground.png, platform.png, brick.png
+/public/assets/         # Game assets directory
+  /sprites/              # Character and object sprites
+  /tiles/                # Platform and terrain tiles
   /backgrounds/          # sky.png, clouds.png
   /audio/                # jump.mp3, coin.mp3, bgmusic.mp3
 /src/
@@ -155,18 +155,18 @@ Use these exact paths in your ${engine === 'phaser' ? 'this.load.image()' : 'img
 
 \`\`\`javascript
 ${engine === 'phaser' ? `// In preload() function
-this.load.image('player', '/game-assets/sprites/player.png');
-this.load.image('enemy', '/game-assets/sprites/enemy.png');
-this.load.image('coin', '/game-assets/sprites/coin.png');
-this.load.image('ground', '/game-assets/tiles/ground.png');
-this.load.image('platform', '/game-assets/tiles/platform.png');
-this.load.image('sky', '/game-assets/backgrounds/sky.png');
-this.load.audio('jump', '/game-assets/audio/jump.mp3');
-this.load.audio('coin', '/game-assets/audio/coin.mp3');` : `// Canvas asset loading
+this.load.image('player', '/assets/player.png');
+this.load.image('enemy', '/assets/enemy.png');
+this.load.image('coin', '/assets/coin.png');
+this.load.image('ground', '/assets/ground.png');
+this.load.image('platform', '/assets/platform.png');
+this.load.image('sky', '/assets/sky.png');
+this.load.audio('jump', '/assets/jump.mp3');
+this.load.audio('coin', '/assets/coin.mp3');` : `// Canvas asset loading
 const playerImg = new Image();
-playerImg.src = '/game-assets/sprites/player.png';
+playerImg.src = '/assets/player.png';
 const groundImg = new Image();
-groundImg.src = '/game-assets/tiles/ground.png';`}
+groundImg.src = '/assets/ground.png';`}
 \`\`\`
 
 ## 🎯 Win/Lose Conditions
@@ -223,8 +223,8 @@ Create a top-down or side-scrolling shooter game using **${engine === 'phaser' ?
 - **Difficulty:** Increasing enemy spawn rate
 
 ## 📦 Assets
-- Use \`/game-assets/sprites/player.png\` for player ship
-- Use \`/game-assets/sprites/enemy.png\` for enemy ships
+- Use \`/assets/player.png\` for player ship
+- Use \`/assets/enemy.png\` for enemy ships
 - Use colored rectangles for bullets initially
 
 ${complexity === 'complex' ? '## 🎯 Advanced Features\n- Multiple weapon types\n- Power-ups and upgrades\n- Boss battles with phases\n- Particle effects for explosions' : ''}
@@ -286,13 +286,13 @@ When a user provides a vague game request (like "make a mario game" or "create f
 4. **Structure Requirements:** Add technical specs, asset paths, and implementation details
 5. **Generate Complete Prompt:** Output a detailed, structured prompt that includes:
    - Exact file structure
-   - Asset paths using /game-assets/ directory
+   - Asset paths using appropriate directory structure
    - Complete game mechanics description
    - Win/lose conditions
    - Technical constraints
    - Expected output format
 
-**Always use the pre-installed assets at /game-assets/ instead of placeholder graphics.**
+**Graphics approach will be defined by the new system methodology.**
 
 Example transformation:
 User: "make a mario game"
