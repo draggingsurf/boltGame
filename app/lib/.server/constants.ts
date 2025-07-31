@@ -17,7 +17,7 @@ PROVIDER_LIST.forEach((provider) => {
 
 // Create client-safe provider data (without server-side methods)
 export const getClientSafeProviders = () => {
-  return PROVIDER_LIST.map(provider => ({
+  return PROVIDER_LIST.map((provider) => ({
     name: provider.name,
     staticModels: provider.staticModels,
     getApiKeyLink: provider.getApiKeyLink,
@@ -28,4 +28,4 @@ export const getClientSafeProviders = () => {
       apiTokenKey: provider.config?.apiTokenKey,
     },
   }));
-}; 
+};

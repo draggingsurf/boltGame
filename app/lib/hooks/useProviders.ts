@@ -31,24 +31,25 @@ export function useProviders() {
 
   useEffect(() => {
     fetch('/api/providers')
-      .then(response => {
+      .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to fetch providers');
         }
+
         return response.json();
       })
       .then((rawData) => {
         const data = rawData as ProvidersData;
         setData(data);
-        
+
         // Initialize the settings store with provider data
         if (data.providers) {
           initializeProviders(data.providers);
         }
-        
+
         setLoading(false);
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err);
         setLoading(false);
       });
@@ -61,4 +62,4 @@ export function useProviders() {
     loading,
     error,
   };
-} 
+}

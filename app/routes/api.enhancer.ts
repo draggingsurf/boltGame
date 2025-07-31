@@ -4,7 +4,11 @@ import { stripIndents } from '~/utils/stripIndent';
 import type { ProviderInfo } from '~/types/model';
 import { getApiKeysFromCookie, getProviderSettingsFromCookie } from '~/lib/api/cookies';
 import { createScopedLogger } from '~/utils/logger';
-import { enhanceGamePrompt, PROMPT_ENHANCER_INSTRUCTIONS } from '~/lib/common/prompts/game-prompt-enhancer';
+import {
+  enhanceGamePrompt,
+
+  // PROMPT_ENHANCER_INSTRUCTIONS as _PROMPT_ENHANCER_INSTRUCTIONS,
+} from '~/lib/common/prompts/game-prompt-enhancer';
 
 export async function action(args: ActionFunctionArgs) {
   return enhancerAction(args);
@@ -14,14 +18,32 @@ const logger = createScopedLogger('api.enhancer');
 
 // Game detection patterns - same as in game-prompt-enhancer.ts
 const GAME_KEYWORDS = [
-  'game', 'mario', 'sonic', 'platformer', 'shooter', 'puzzle', 'racing',
-  'flappy', 'tetris', 'snake', 'arcade', 'player', 'enemy', 'level',
-  'score', 'lives', 'power-up', 'boss', 'sprite', 'phaser', 'kaboom'
+  'game',
+  'mario',
+  'sonic',
+  'platformer',
+  'shooter',
+  'puzzle',
+  'racing',
+  'flappy',
+  'tetris',
+  'snake',
+  'arcade',
+  'player',
+  'enemy',
+  'level',
+  'score',
+  'lives',
+  'power-up',
+  'boss',
+  'sprite',
+  'phaser',
+  'kaboom',
 ];
 
 function isGameRequest(message: string): boolean {
   const normalizedMessage = message.toLowerCase();
-  return GAME_KEYWORDS.some(keyword => normalizedMessage.includes(keyword));
+  return GAME_KEYWORDS.some((keyword) => normalizedMessage.includes(keyword));
 }
 
 async function enhancerAction({ context, request }: ActionFunctionArgs) {
@@ -55,53 +77,54 @@ async function enhancerAction({ context, request }: ActionFunctionArgs) {
 
   // Check if this is a game request
   const isGame = isGameRequest(message);
-  
+
   // If it's a game request, use the game prompt enhancer directly
   if (isGame) {
     logger.info('🎮 Game request detected - using game-specific enhancement');
-    
+
     try {
       // Use the game prompt enhancer
       const gameEnhancement = enhanceGamePrompt({
         userInput: message,
-        preferredEngine: 'phaser' // Default to Phaser 3
+        preferredEngine: 'phaser', // Default to Phaser 3
       });
-      
+
       // Stream the enhanced game prompt back
       const result = await streamText({
         messages: [
           {
             role: 'assistant',
-            content: gameEnhancement.enhancedPrompt
-          }
+            content: gameEnhancement.enhancedPrompt,
+          },
         ],
         env: context.cloudflare?.env as any,
         apiKeys,
         providerSettings,
         options: {
           // Empty system prompt since we're just streaming back the enhanced prompt
-          system: ''
-        }
+          system: '',
+        },
       });
 
       return new Response(result.textStream, {
         status: 200,
         headers: {
           'Content-Type': 'text/event-stream; charset=utf-8',
-          'Connection': 'keep-alive',
+          Connection: 'keep-alive',
           'Cache-Control': 'no-cache',
-          'X-Enhancement-Type': 'game' // Custom header to indicate game enhancement
+          'X-Enhancement-Type': 'game', // Custom header to indicate game enhancement
         },
       });
     } catch (error) {
       logger.error('Game enhancement error:', error);
+
       // Fall back to general enhancement if game enhancement fails
     }
   }
 
   // Use general enhancement for non-game requests
   logger.info('📝 Using general prompt enhancement');
-  
+
   try {
     const result = await streamText({
       messages: [

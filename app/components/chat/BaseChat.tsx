@@ -101,7 +101,7 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
       enhancePrompt,
       sendMessage,
       handleStop,
-      importChat,
+      importChat: _importChat,
       exportChat,
       uploadedFiles = [],
       setUploadedFiles,
@@ -352,10 +352,12 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                   Build Worlds, Skip the
                   <br />
                   <span className="text-emerald-400">
-                    &lt;<span className="relative inline-block">
+                    &lt;
+                    <span className="relative inline-block">
                       Code
                       <span className="absolute top-1/2 left-0 w-full h-0.5 bg-red-500 transform -translate-y-1/2"></span>
-                    </span>&gt;
+                    </span>
+                    &gt;
                   </span>
                 </h1>
                 <p className="text-md lg:text-xl mb-8 text-bolt-elements-textSecondary animate-fade-in animation-delay-200">

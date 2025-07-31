@@ -1,4 +1,4 @@
-import { anthropic } from '@ai-sdk/anthropic';
+// import { anthropic as _anthropic } from '@ai-sdk/anthropic';
 import { generateText, type CoreTool, type GenerateTextResult, type Message } from 'ai';
 import type { IProviderSetting } from '~/types/model';
 import { DEFAULT_MODEL, DEFAULT_PROVIDER, PROVIDER_LIST } from '~/lib/.server/constants';

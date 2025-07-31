@@ -55,8 +55,10 @@ const PROVIDER_SETTINGS_KEY = 'provider_settings';
 // Add this helper function at the top of the file
 const isBrowser = typeof window !== 'undefined';
 
-// Initialize provider settings from localStorage only
-// Provider defaults will be populated when useProviders hook loads the data
+/*
+ * Initialize provider settings from localStorage only
+ * Provider defaults will be populated when useProviders hook loads the data
+ */
 const getInitialProviderSettings = (): ProviderSetting => {
   const initialSettings: ProviderSetting = {};
 
@@ -84,13 +86,15 @@ const getInitialProviderSettings = (): ProviderSetting => {
 export const providersStore = map<ProviderSetting>(getInitialProviderSettings());
 
 // Function to initialize providers from API data
-export const initializeProviders = (providers: Array<{
-  name: string;
-  staticModels: any[];
-  getApiKeyLink?: string;
-  labelForGetApiKey?: string;
-  icon?: string;
-}>) => {
+export const initializeProviders = (
+  providers: Array<{
+    name: string;
+    staticModels: any[];
+    getApiKeyLink?: string;
+    labelForGetApiKey?: string;
+    icon?: string;
+  }>,
+) => {
   const currentSettings = providersStore.get();
   const newSettings: ProviderSetting = {};
 
@@ -107,7 +111,7 @@ export const initializeProviders = (providers: Array<{
   });
 
   // Update the store with all provider data
-  Object.keys(newSettings).forEach(providerName => {
+  Object.keys(newSettings).forEach((providerName) => {
     providersStore.setKey(providerName, newSettings[providerName]);
   });
 };

@@ -17,16 +17,13 @@ export class GCPVertexAnthropicStatusChecker extends BaseProviderChecker {
           text.includes('degraded'));
 
       // Check for general Google Cloud issues
-      const hasGeneralIssues = 
-        text.includes('Major Incidents') || 
-        text.includes('Service Disruption') ||
-        text.includes('Partial outage');
+      const hasGeneralIssues =
+        text.includes('Major Incidents') || text.includes('Service Disruption') || text.includes('Partial outage');
 
       // Check for Anthropic model availability on Vertex AI
-      const hasAnthropicIssues = 
-        text.includes('Claude') || 
-        (text.includes('Anthropic') && 
-         (text.includes('Incident') || text.includes('Disruption')));
+      const hasAnthropicIssues =
+        text.includes('Claude') ||
+        (text.includes('Anthropic') && (text.includes('Incident') || text.includes('Disruption')));
 
       // Extract incidents related to Vertex AI
       const incidents: string[] = [];
@@ -35,10 +32,12 @@ export class GCPVertexAnthropicStatusChecker extends BaseProviderChecker {
       for (const match of incidentMatches) {
         const [, date, title, impact] = match;
 
-        if (title.includes('Vertex AI') || 
-            title.includes('Claude') || 
-            title.includes('Anthropic') ||
-            (title.includes('Cloud') && impact.includes('High'))) {
+        if (
+          title.includes('Vertex AI') ||
+          title.includes('Claude') ||
+          title.includes('Anthropic') ||
+          (title.includes('Cloud') && impact.includes('High'))
+        ) {
           incidents.push(`${date}: ${title.trim()} - Impact: ${impact.trim()}`);
         }
       }
@@ -61,7 +60,7 @@ export class GCPVertexAnthropicStatusChecker extends BaseProviderChecker {
       };
     } catch (error) {
       console.error('Error checking GCP Vertex AI status:', error);
-      
+
       return {
         status: 'down',
         message: 'Unable to check Vertex AI status',
@@ -69,4 +68,4 @@ export class GCPVertexAnthropicStatusChecker extends BaseProviderChecker {
       };
     }
   }
-} 
+}

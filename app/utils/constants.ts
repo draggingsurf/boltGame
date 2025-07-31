@@ -15,8 +15,10 @@ export const TOOL_NO_EXECUTE_FUNCTION = 'Error: No execute function found on too
 export const TOOL_EXECUTION_DENIED = 'Error: User denied access to tool execution';
 export const TOOL_EXECUTION_ERROR = 'Error: An error occured while calling tool';
 
-// Note: PROVIDER_LIST, DEFAULT_PROVIDER, and providerBaseUrlEnvKeys moved to server-only constants
-// to prevent client-side bundling of Google Cloud SDK and other server-only dependencies
+/*
+ * Note: PROVIDER_LIST, DEFAULT_PROVIDER, and providerBaseUrlEnvKeys moved to server-only constants
+ * to prevent client-side bundling of Google Cloud SDK and other server-only dependencies
+ */
 
 // starter Templates
 

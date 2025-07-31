@@ -118,7 +118,7 @@ interface ChatProps {
 export const ChatImpl = memo(
   ({ description, initialMessages, storeMessageHistory, importChat, exportChat }: ChatProps) => {
     useShortcuts();
-    
+
     const { providers, defaultProvider } = useProviders();
 
     const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -145,6 +145,7 @@ export const ChatImpl = memo(
     const [provider, setProvider] = useState<ProviderInfo | null>(() => {
       const savedProvider = Cookies.get('selectedProvider');
       const foundProvider = providers.find((p) => p.name === savedProvider);
+
       return foundProvider || null;
     });
     const { showChat } = useStore(chatStore);
@@ -373,7 +374,7 @@ export const ChatImpl = memo(
     // Effect to set default provider when providers are loaded
     useEffect(() => {
       if (!provider && providers.length > 0) {
-        const defaultProviderObj = providers.find(p => p.name === defaultProvider) || providers[0];
+        const defaultProviderObj = providers.find((p) => p.name === defaultProvider) || providers[0];
         setProvider(defaultProviderObj);
       }
     }, [providers, defaultProvider, provider]);
@@ -461,7 +462,7 @@ export const ChatImpl = memo(
           const { template, title } = await selectStarterTemplate({
             message: finalMessageContent,
             model,
-            provider: provider || providers.find(p => p.name === defaultProvider) || providers[0],
+            provider: provider || providers.find((p) => p.name === defaultProvider) || providers[0],
           });
 
           if (template !== 'blank') {
@@ -655,7 +656,7 @@ export const ChatImpl = memo(
         sendMessage={sendMessage}
         model={model}
         setModel={handleModelChange}
-        provider={provider || providers.find(p => p.name === defaultProvider) || providers[0]}
+        provider={provider || providers.find((p) => p.name === defaultProvider) || providers[0]}
         setProvider={handleProviderChange}
         providerList={activeProviders}
         handleInputChange={(e) => {
@@ -684,7 +685,7 @@ export const ChatImpl = memo(
               scrollTextArea();
             },
             model,
-            provider || providers.find(p => p.name === defaultProvider) || providers[0],
+            provider || providers.find((p) => p.name === defaultProvider) || providers[0],
             apiKeys,
           );
         }}

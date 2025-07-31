@@ -90,9 +90,7 @@ export default class GCPVertexAnthropicProvider extends BaseProvider {
     const { projectId, region, serviceAccountKey } = parsedConfig;
 
     if (!projectId) {
-      throw new Error(
-        'Missing required GCP configuration. Configuration must include projectId.',
-      );
+      throw new Error('Missing required GCP configuration. Configuration must include projectId.');
     }
 
     return {
@@ -119,7 +117,9 @@ export default class GCPVertexAnthropicProvider extends BaseProvider {
     });
 
     if (!apiKey) {
-      throw new Error(`Missing configuration for ${this.name} provider. Please provide GCP_VERTEX_CONFIG as JSON string with projectId.`);
+      throw new Error(
+        `Missing configuration for ${this.name} provider. Please provide GCP_VERTEX_CONFIG as JSON string with projectId.`,
+      );
     }
 
     const config = this._parseAndValidateConfig(apiKey);
@@ -142,7 +142,9 @@ export default class GCPVertexAnthropicProvider extends BaseProvider {
 
       return vertexAnthropic(model);
     } catch (error) {
-      throw new Error(`Failed to initialize ${this.name} provider: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      throw new Error(
+        `Failed to initialize ${this.name} provider: ${error instanceof Error ? error.message : 'Unknown error'}`,
+      );
     }
   }
 
@@ -158,4 +160,4 @@ export default class GCPVertexAnthropicProvider extends BaseProvider {
       };
     }
   }
-} 
+}

@@ -200,11 +200,11 @@ export class LLMManager {
   getDefaultProvider(): BaseProvider {
     // Set GCP Vertex Anthropic as the default provider
     const gcpVertexProvider = this._providers.get('GCP-Vertex-Anthropic');
-    
+
     if (gcpVertexProvider) {
       return gcpVertexProvider;
     }
-    
+
     // Fallback to first provider if GCP Vertex Anthropic is not available
     const firstProvider = this._providers.values().next().value;
 
