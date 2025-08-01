@@ -1,0 +1,899 @@
+{
+  "name": "Curated Platformer Asset Registry",
+  "description": "Essential ~100 assets from Kenney's platformer pack with correct Supabase URLs",
+  "version": "3.0.0",
+  "baseURL": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites",
+  "gameType": "platformer",
+  "uniformAssets": {
+    "description": "All sprites are uniform size - no complex scaling needed",
+    "standardSize": 64,
+    "scale": 1.0,
+    "gridSize": 32
+  },
+  "categories": {
+    "characters": {
+      "description": "Essential player character sprites - 5 colors, key states",
+      "count": 15,
+      "assets": [
+        {
+          "id": "character_beige_idle",
+          "name": "Beige Character Idle",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/characters/character_beige_idle.png",
+          "type": "character",
+          "tags": ["player", "idle", "beige", "main"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "character_beige_jump",
+          "name": "Beige Character Jump",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/characters/character_beige_jump.png",
+          "type": "character",
+          "tags": ["player", "jump", "beige"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "character_beige_walk_a",
+          "name": "Beige Character Walk A",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/characters/character_beige_walk_a.png",
+          "type": "character",
+          "tags": ["player", "walk", "beige", "animation"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "character_purple_idle",
+          "name": "Purple Character Idle",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/characters/character_purple_idle.png",
+          "type": "character",
+          "tags": ["player", "idle", "purple", "main"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "character_purple_jump",
+          "name": "Purple Character Jump",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/characters/character_purple_jump.png",
+          "type": "character",
+          "tags": ["player", "jump", "purple"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "character_purple_walk_a",
+          "name": "Purple Character Walk A",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/characters/character_purple_walk_a.png",
+          "type": "character",
+          "tags": ["player", "walk", "purple", "animation"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "character_yellow_idle",
+          "name": "Yellow Character Idle",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/characters/character_yellow_idle.png",
+          "type": "character",
+          "tags": ["player", "idle", "yellow", "main"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "character_yellow_jump",
+          "name": "Yellow Character Jump",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/characters/character_yellow_jump.png",
+          "type": "character",
+          "tags": ["player", "jump", "yellow"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "character_yellow_walk_a",
+          "name": "Yellow Character Walk A",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/characters/character_yellow_walk_a.png",
+          "type": "character",
+          "tags": ["player", "walk", "yellow", "animation"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "character_green_idle",
+          "name": "Green Character Idle",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/characters/character_green_idle.png",
+          "type": "character",
+          "tags": ["player", "idle", "green", "main"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "character_green_jump",
+          "name": "Green Character Jump",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/characters/character_green_jump.png",
+          "type": "character",
+          "tags": ["player", "jump", "green"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "character_pink_idle",
+          "name": "Pink Character Idle",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/characters/character_pink_idle.png",
+          "type": "character",
+          "tags": ["player", "idle", "pink", "main"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "character_pink_jump",
+          "name": "Pink Character Jump",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/characters/character_pink_jump.png",
+          "type": "character",
+          "tags": ["player", "jump", "pink"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "character_beige_front",
+          "name": "Beige Character Front",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/characters/character_beige_front.png",
+          "type": "character",
+          "tags": ["player", "front", "beige", "menu"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "character_beige_hit",
+          "name": "Beige Character Hit",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/characters/character_beige_hit.png",
+          "type": "character",
+          "tags": ["player", "hit", "beige", "damage"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        }
+      ]
+    },
+    "enemies": {
+      "description": "Essential enemy sprites for different gameplay mechanics",
+      "count": 20,
+      "assets": [
+        {
+          "id": "snail_walk_a",
+          "name": "Snail Walk A",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/snail_walk_a.png",
+          "type": "enemy",
+          "tags": ["enemy", "snail", "slow", "basic"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "snail_walk_b",
+          "name": "Snail Walk B",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/snail_walk_b.png",
+          "type": "enemy",
+          "tags": ["enemy", "snail", "slow", "animation"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "mouse_walk_a",
+          "name": "Mouse Walk A",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/mouse_walk_a.png",
+          "type": "enemy",
+          "tags": ["enemy", "mouse", "fast", "basic"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "slime_normal_walk_a",
+          "name": "Slime Normal Walk A",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/slime_normal_walk_a.png",
+          "type": "enemy",
+          "tags": ["enemy", "slime", "bounce", "basic"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "slime_fire_walk_a",
+          "name": "Slime Fire Walk A",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/slime_fire_walk_a.png",
+          "type": "enemy",
+          "tags": ["enemy", "slime", "fire", "dangerous"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "ladybug_walk_a",
+          "name": "Ladybug Walk A",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/ladybug_walk_a.png",
+          "type": "enemy",
+          "tags": ["enemy", "ladybug", "flying", "medium"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "frog_idle",
+          "name": "Frog Idle",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/frog_idle.png",
+          "type": "enemy",
+          "tags": ["enemy", "frog", "jumping", "medium"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "bee_rest",
+          "name": "Bee Rest",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/bee_rest.png",
+          "type": "enemy",
+          "tags": ["enemy", "bee", "flying", "medium"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "fish_blue_swim_a",
+          "name": "Fish Blue Swim A",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/fish_blue_swim_a.png",
+          "type": "enemy",
+          "tags": ["enemy", "fish", "water", "swimming"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "saw_rest",
+          "name": "Saw Rest",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/saw_rest.png",
+          "type": "enemy",
+          "tags": ["enemy", "saw", "trap", "deadly"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "block_fall",
+          "name": "Falling Block",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/block_fall.png",
+          "type": "enemy",
+          "tags": ["enemy", "block", "falling", "trap"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "worm_normal_move_a",
+          "name": "Worm Normal Move A",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/worm_normal_move_a.png",
+          "type": "enemy",
+          "tags": ["enemy", "worm", "underground", "basic"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "slime_spike_walk_a",
+          "name": "Slime Spike Walk A",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/slime_spike_walk_a.png",
+          "type": "enemy",
+          "tags": ["enemy", "slime", "spike", "dangerous"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "fly_rest",
+          "name": "Fly Rest",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/fly_rest.png",
+          "type": "enemy",
+          "tags": ["enemy", "fly", "flying", "small"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "barnacle_attack_rest",
+          "name": "Barnacle Attack Rest",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/barnacle_attack_rest.png",
+          "type": "enemy",
+          "tags": ["enemy", "barnacle", "stationary", "trap"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "fish_yellow_swim_a",
+          "name": "Fish Yellow Swim A",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/fish_yellow_swim_a.png",
+          "type": "enemy",
+          "tags": ["enemy", "fish", "water", "swimming"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "slime_block_walk_a",
+          "name": "Slime Block Walk A",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/slime_block_walk_a.png",
+          "type": "enemy",
+          "tags": ["enemy", "slime", "block", "heavy"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "frog_jump",
+          "name": "Frog Jump",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/frog_jump.png",
+          "type": "enemy",
+          "tags": ["enemy", "frog", "jumping", "animation"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "bee_a",
+          "name": "Bee Flying A",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/bee_a.png",
+          "type": "enemy",
+          "tags": ["enemy", "bee", "flying", "animation"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "ladybug_fly",
+          "name": "Ladybug Fly",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/ladybug_fly.png",
+          "type": "enemy",
+          "tags": ["enemy", "ladybug", "flying", "animation"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        }
+      ]
+    },
+    "backgrounds": {
+      "description": "Essential background themes for different game environments",
+      "count": 8,
+      "assets": [
+        {
+          "id": "background_color_hills",
+          "name": "Hills Background",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/backgrounds/background_color_hills.png",
+          "type": "background",
+          "tags": ["background", "hills", "nature", "green"],
+          "dimensions": { "width": 800, "height": 600, "scale": "fit" }
+        },
+        {
+          "id": "background_color_desert",
+          "name": "Desert Background",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/backgrounds/background_color_desert.png",
+          "type": "background",
+          "tags": ["background", "desert", "sand", "hot"],
+          "dimensions": { "width": 800, "height": 600, "scale": "fit" }
+        },
+        {
+          "id": "background_color_mushrooms",
+          "name": "Mushroom Forest Background",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/backgrounds/background_color_mushrooms.png",
+          "type": "background",
+          "tags": ["background", "mushroom", "forest", "fantasy"],
+          "dimensions": { "width": 800, "height": 600, "scale": "fit" }
+        },
+        {
+          "id": "background_color_trees",
+          "name": "Forest Background",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/backgrounds/background_color_trees.png",
+          "type": "background",
+          "tags": ["background", "forest", "trees", "nature"],
+          "dimensions": { "width": 800, "height": 600, "scale": "fit" }
+        },
+        {
+          "id": "background_fade_hills",
+          "name": "Hills Fade Background",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/backgrounds/background_fade_hills.png",
+          "type": "background",
+          "tags": ["background", "hills", "fade", "subtle"],
+          "dimensions": { "width": 800, "height": 600, "scale": "fit" }
+        },
+        {
+          "id": "background_clouds",
+          "name": "Clouds Background",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/backgrounds/background_clouds.png",
+          "type": "background",
+          "tags": ["background", "clouds", "sky", "aerial"],
+          "dimensions": { "width": 800, "height": 600, "scale": "fit" }
+        },
+        {
+          "id": "background_solid_sky",
+          "name": "Sky Background",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/backgrounds/background_solid_sky.png",
+          "type": "background",
+          "tags": ["background", "sky", "solid", "simple"],
+          "dimensions": { "width": 800, "height": 600, "scale": "fit" }
+        },
+        {
+          "id": "background_fade_desert",
+          "name": "Desert Fade Background",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/backgrounds/background_fade_desert.png",
+          "type": "background",
+          "tags": ["background", "desert", "fade", "subtle"],
+          "dimensions": { "width": 800, "height": 600, "scale": "fit" }
+        }
+      ]
+    },
+    "tiles_platforms": {
+      "description": "Essential platform tiles for terrain building",
+      "count": 25,
+      "assets": [
+        {
+          "id": "terrain_grass_block",
+          "name": "Grass Block",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/terrain_grass_block.png",
+          "type": "platform",
+          "tags": ["platform", "grass", "green", "basic"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "terrain_stone_block",
+          "name": "Stone Block",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/terrain_stone_block.png",
+          "type": "platform",
+          "tags": ["platform", "stone", "gray", "basic"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "terrain_sand_block",
+          "name": "Sand Block",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/terrain_sand_block.png",
+          "type": "platform",
+          "tags": ["platform", "sand", "yellow", "desert"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "terrain_snow_block",
+          "name": "Snow Block",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/terrain_snow_block.png",
+          "type": "platform",
+          "tags": ["platform", "snow", "white", "winter"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "terrain_dirt_block",
+          "name": "Dirt Block",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/terrain_dirt_block.png",
+          "type": "platform",
+          "tags": ["platform", "dirt", "brown", "earth"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "terrain_purple_block",
+          "name": "Purple Block",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/terrain_purple_block.png",
+          "type": "platform",
+          "tags": ["platform", "purple", "magic", "fantasy"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "terrain_grass_horizontal_left",
+          "name": "Grass Platform Left",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/terrain_grass_horizontal_left.png",
+          "type": "platform",
+          "tags": ["platform", "grass", "edge", "left"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "terrain_grass_horizontal_middle",
+          "name": "Grass Platform Middle",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/terrain_grass_horizontal_middle.png",
+          "type": "platform",
+          "tags": ["platform", "grass", "middle", "repeatable"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "terrain_grass_horizontal_right",
+          "name": "Grass Platform Right",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/terrain_grass_horizontal_right.png",
+          "type": "platform",
+          "tags": ["platform", "grass", "edge", "right"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "terrain_stone_horizontal_left",
+          "name": "Stone Platform Left",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/terrain_stone_horizontal_left.png",
+          "type": "platform",
+          "tags": ["platform", "stone", "edge", "left"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "terrain_stone_horizontal_middle",
+          "name": "Stone Platform Middle",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/terrain_stone_horizontal_middle.png",
+          "type": "platform",
+          "tags": ["platform", "stone", "middle", "repeatable"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "terrain_stone_horizontal_right",
+          "name": "Stone Platform Right",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/terrain_stone_horizontal_right.png",
+          "type": "platform",
+          "tags": ["platform", "stone", "edge", "right"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "terrain_grass_cloud",
+          "name": "Grass Cloud Platform",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/terrain_grass_cloud.png",
+          "type": "platform",
+          "tags": ["platform", "grass", "floating", "cloud"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "terrain_stone_cloud",
+          "name": "Stone Cloud Platform",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/terrain_stone_cloud.png",
+          "type": "platform",
+          "tags": ["platform", "stone", "floating", "cloud"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "terrain_sand_horizontal_left",
+          "name": "Sand Platform Left",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/terrain_sand_horizontal_left.png",
+          "type": "platform",
+          "tags": ["platform", "sand", "edge", "left"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "terrain_sand_horizontal_middle",
+          "name": "Sand Platform Middle",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/terrain_sand_horizontal_middle.png",
+          "type": "platform",
+          "tags": ["platform", "sand", "middle", "repeatable"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "terrain_sand_horizontal_right",
+          "name": "Sand Platform Right",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/terrain_sand_horizontal_right.png",
+          "type": "platform",
+          "tags": ["platform", "sand", "edge", "right"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "terrain_snow_horizontal_left",
+          "name": "Snow Platform Left",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/terrain_snow_horizontal_left.png",
+          "type": "platform",
+          "tags": ["platform", "snow", "edge", "left"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "terrain_snow_horizontal_middle",
+          "name": "Snow Platform Middle",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/terrain_snow_horizontal_middle.png",
+          "type": "platform",
+          "tags": ["platform", "snow", "middle", "repeatable"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "terrain_snow_horizontal_right",
+          "name": "Snow Platform Right",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/terrain_snow_horizontal_right.png",
+          "type": "platform",
+          "tags": ["platform", "snow", "edge", "right"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "block_planks",
+          "name": "Wooden Planks",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/block_planks.png",
+          "type": "platform",
+          "tags": ["platform", "wood", "planks", "brown"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "brick_brown_diagonal",
+          "name": "Brown Brick Diagonal",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/brick_brown_diagonal.png",
+          "type": "platform",
+          "tags": ["platform", "brick", "brown", "diagonal"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "fence",
+          "name": "Wooden Fence",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/fence.png",
+          "type": "platform",
+          "tags": ["platform", "fence", "wood", "barrier"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "terrain_grass_ramp_short_a",
+          "name": "Grass Ramp Short A",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/terrain_grass_ramp_short_a.png",
+          "type": "platform",
+          "tags": ["platform", "grass", "ramp", "slope"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "terrain_stone_ramp_short_a",
+          "name": "Stone Ramp Short A",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/terrain_stone_ramp_short_a.png",
+          "type": "platform",
+          "tags": ["platform", "stone", "ramp", "slope"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        }
+      ]
+    },
+    "collectibles": {
+      "description": "Essential collectible items - coins, gems, keys, hearts",
+      "count": 20,
+      "assets": [
+        {
+          "id": "coin_bronze",
+          "name": "Bronze Coin",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/coin_bronze.png",
+          "type": "collectible",
+          "tags": ["collectible", "coin", "bronze", "basic"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "coin_silver_side",
+          "name": "Silver Coin",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/coin_silver_side.png",
+          "type": "collectible",
+          "tags": ["collectible", "coin", "silver", "medium"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "gem_blue",
+          "name": "Blue Gem",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/gem_blue.png",
+          "type": "collectible",
+          "tags": ["collectible", "gem", "blue", "valuable"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "gem_green",
+          "name": "Green Gem",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/gem_green.png",
+          "type": "collectible",
+          "tags": ["collectible", "gem", "green", "valuable"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "gem_red",
+          "name": "Red Gem",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/gem_red.png",
+          "type": "collectible",
+          "tags": ["collectible", "gem", "red", "valuable"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "gem_yellow",
+          "name": "Yellow Gem",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/gem_yellow.png",
+          "type": "collectible",
+          "tags": ["collectible", "gem", "yellow", "valuable"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "key_green",
+          "name": "Green Key",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/key_green.png",
+          "type": "collectible",
+          "tags": ["collectible", "key", "green", "unlock"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "heart",
+          "name": "Heart",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/heart.png",
+          "type": "collectible",
+          "tags": ["collectible", "heart", "health", "life"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "hud_coin",
+          "name": "HUD Coin",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/hud_coin.png",
+          "type": "collectible",
+          "tags": ["hud", "coin", "ui", "icon"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "hud_heart",
+          "name": "HUD Heart",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/hud_heart.png",
+          "type": "collectible",
+          "tags": ["hud", "heart", "ui", "health"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "hud_heart_half",
+          "name": "HUD Heart Half",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/hud_heart_half.png",
+          "type": "collectible",
+          "tags": ["hud", "heart", "half", "ui"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "hud_heart_empty",
+          "name": "HUD Heart Empty",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/hud_heart_empty.png",
+          "type": "collectible",
+          "tags": ["hud", "heart", "empty", "ui"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "hud_key_red",
+          "name": "HUD Red Key",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/hud_key_red.png",
+          "type": "collectible",
+          "tags": ["hud", "key", "red", "ui"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "hud_key_blue",
+          "name": "HUD Blue Key",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/hud_key_blue.png",
+          "type": "collectible",
+          "tags": ["hud", "key", "blue", "ui"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "hud_key_green",
+          "name": "HUD Green Key",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/hud_key_green.png",
+          "type": "collectible",
+          "tags": ["hud", "key", "green", "ui"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "block_coin",
+          "name": "Coin Block",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/block_coin.png",
+          "type": "collectible",
+          "tags": ["collectible", "block", "coin", "interactive"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "block_coin_active",
+          "name": "Coin Block Active",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/block_coin_active.png",
+          "type": "collectible",
+          "tags": ["collectible", "block", "coin", "active"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "coin_bronze_side",
+          "name": "Bronze Coin Side",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/coin_bronze_side.png",
+          "type": "collectible",
+          "tags": ["collectible", "coin", "bronze", "side"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "block_strong_coin",
+          "name": "Strong Coin Block",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/block_strong_coin.png",
+          "type": "collectible",
+          "tags": ["collectible", "block", "strong", "coin"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "block_strong_coin_active",
+          "name": "Strong Coin Block Active",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/block_strong_coin_active.png",
+          "type": "collectible",
+          "tags": ["collectible", "block", "strong", "active"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        }
+      ]
+    },
+    "hazards": {
+      "description": "Essential hazard and interactive elements",
+      "count": 12,
+      "assets": [
+        {
+          "id": "saw",
+          "name": "Saw Blade",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/saw.png",
+          "type": "hazard",
+          "tags": ["hazard", "saw", "trap", "deadly"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "bomb",
+          "name": "Bomb",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/bomb.png",
+          "type": "hazard",
+          "tags": ["hazard", "bomb", "explosive", "timed"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "bomb_active",
+          "name": "Bomb Active",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/bomb_active.png",
+          "type": "hazard",
+          "tags": ["hazard", "bomb", "active", "explosive"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "lava",
+          "name": "Lava",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/lava.png",
+          "type": "hazard",
+          "tags": ["hazard", "lava", "deadly", "hot"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "lava_top",
+          "name": "Lava Top",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/lava_top.png",
+          "type": "hazard",
+          "tags": ["hazard", "lava", "surface", "hot"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "water",
+          "name": "Water",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/water.png",
+          "type": "hazard",
+          "tags": ["hazard", "water", "liquid", "drowning"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "water_top",
+          "name": "Water Top",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/water_top.png",
+          "type": "hazard",
+          "tags": ["hazard", "water", "surface", "swimming"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "torch_on_a",
+          "name": "Torch On A",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/torch_on_a.png",
+          "type": "hazard",
+          "tags": ["decoration", "torch", "fire", "light"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "torch_off",
+          "name": "Torch Off",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/torch_off.png",
+          "type": "hazard",
+          "tags": ["decoration", "torch", "unlit", "dark"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "weight",
+          "name": "Weight",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/weight.png",
+          "type": "hazard",
+          "tags": ["interactive", "weight", "heavy", "mechanism"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "window",
+          "name": "Window",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/window.png",
+          "type": "hazard",
+          "tags": ["decoration", "window", "background", "detail"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        },
+        {
+          "id": "rop_attached",
+          "name": "Rope Attached",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/rop_attached.png",
+          "type": "hazard",
+          "tags": ["interactive", "rope", "climbing", "mechanism"],
+          "dimensions": { "width": 64, "height": 64, "scale": 1.0 }
+        }
+      ]
+    }
+  },
+  "usage": {
+    "description": "How to use this curated asset registry effectively",
+    "instructions": [
+      "All sprites are 64x64 pixels - use scale 1.0 for pixel-perfect rendering",
+      "No complex scaling calculations needed - everything is uniform",
+      "Use tags to select thematically matching assets",
+      "Characters have multiple states for animation",
+      "Platforms have left/middle/right pieces for building longer platforms",
+      "Collectibles include both game items and HUD elements",
+      "Backgrounds scale to fit screen using 'fit' scaling"
+    ],
+    "quickStart": {
+      "simpleGame": {
+        "player": "character_beige_idle",
+        "enemy": "snail_walk_a", 
+        "platform": "terrain_grass_block",
+        "collectible": "coin_bronze",
+        "background": "background_color_hills"
+      },
+      "desertTheme": {
+        "player": "character_yellow_idle",
+        "enemy": "mouse_walk_a",
+        "platform": "terrain_sand_block", 
+        "collectible": "gem_yellow",
+        "background": "background_color_desert"
+      },
+      "winterTheme": {
+        "player": "character_purple_idle",
+        "enemy": "slime_normal_walk_a",
+        "platform": "terrain_snow_block",
+        "collectible": "gem_blue", 
+        "background": "background_fade_hills"
+      }
+    },
+    "exampleCode": {
+      "description": "Simple Phaser 3 example using uniform assets",
+      "javascript": "// All sprites are 64x64, use scale 1.0\nthis.player = this.physics.add.sprite(100, 400, 'character_beige_idle');\nthis.player.setScale(1.0); // Pixel perfect!\nthis.player.body.setSize(48, 60); // Collision box\n\n// Platform creation\nconst platform = this.physics.add.sprite(200, 500, 'terrain_grass_block');\nplatform.setScale(1.0);\nplatform.body.setSize(64, 32);\n\n// Collectible\nconst coin = this.physics.add.sprite(200, 460, 'coin_bronze');\ncoin.setScale(1.0);\ncoin.body.setSize(48, 48);"
+    },
+    "assetCount": {
+      "characters": 15,
+      "enemies": 20, 
+      "backgrounds": 8,
+      "platforms": 25,
+      "collectibles": 20,
+      "hazards": 12,
+      "total": 100
+    }
+  }
+} 

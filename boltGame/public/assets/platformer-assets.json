@@ -1,0 +1,440 @@
+{
+  "name": "Platformer Asset Registry",
+  "description": "Supabase-hosted assets for platformer games with standardized dimensions",
+  "version": "2.0.0",
+  "gameType": "platformer",
+  "standardDimensions": {
+    "gameUnit": 32,
+    "description": "All game elements scaled to multiples of 32px for consistency",
+    "targetSizes": {
+      "character": 32,
+      "enemy": 24,
+      "collectible": 16,
+      "platform": 32,
+      "background": "fullscreen"
+    }
+  },
+  "categories": {
+    "characters": {
+      "description": "Player character sprites",
+      "targetSize": 32,
+      "assets": [
+        {
+          "id": "character_beige",
+          "name": "Beige Character",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/characters/character_beige_front(1).png",
+          "type": "character",
+          "tags": ["player", "idle", "beige"],
+          "description": "Beige character facing front",
+          "dimensions": {
+            "width": 64,
+            "height": 64,
+            "targetScale": 0.5,
+            "collisionBox": { "width": 24, "height": 32 }
+          }
+        },
+        {
+          "id": "character_green_duck",
+          "name": "Green Duck Character",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/characters/character_green_duck(1).png",
+          "type": "character",
+          "tags": ["player", "duck", "green"],
+          "description": "Green duck character",
+          "dimensions": {
+            "width": 64,
+            "height": 64,
+            "targetScale": 0.5,
+            "collisionBox": { "width": 24, "height": 32 }
+          }
+        },
+        {
+          "id": "character_pink_jump",
+          "name": "Pink Character Jumping",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/characters/character_pink_jump.png",
+          "type": "character",
+          "tags": ["player", "jump", "pink", "animation"],
+          "description": "Pink character in jumping pose",
+          "dimensions": {
+            "width": 64,
+            "height": 64,
+            "targetScale": 0.5,
+            "collisionBox": { "width": 24, "height": 32 }
+          }
+        },
+        {
+          "id": "character_purple_walk",
+          "name": "Purple Character Walking",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/characters/character_purple_walk_a.png",
+          "type": "character",
+          "tags": ["player", "walk", "purple", "animation"],
+          "description": "Purple character walking animation frame A",
+          "dimensions": {
+            "width": 64,
+            "height": 64,
+            "targetScale": 0.5,
+            "collisionBox": { "width": 24, "height": 32 }
+          }
+        },
+        {
+          "id": "character_yellow_idle",
+          "name": "Yellow Character Idle",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/characters/character_yellow_idle(1).png",
+          "type": "character",
+          "tags": ["player", "idle", "yellow"],
+          "description": "Yellow character in idle pose",
+          "dimensions": {
+            "width": 64,
+            "height": 64,
+            "targetScale": 0.5,
+            "collisionBox": { "width": 24, "height": 32 }
+          }
+        }
+      ]
+    },
+    "enemies": {
+      "description": "Enemy sprites for platformer games",
+      "targetSize": 24,
+      "assets": [
+        {
+          "id": "snail_walk",
+          "name": "Walking Snail",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/snail_walk_a(1).png",
+          "type": "enemy",
+          "tags": ["enemy", "snail", "walk", "slow"],
+          "description": "Snail enemy walking animation",
+          "dimensions": {
+            "width": 48,
+            "height": 32,
+            "targetScale": 0.5,
+            "collisionBox": { "width": 20, "height": 16 }
+          }
+        },
+        {
+          "id": "slime_block_walk",
+          "name": "Walking Slime Block",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/slime_block_walk_a(1).png",
+          "type": "enemy",
+          "tags": ["enemy", "slime", "walk", "block"],
+          "description": "Block slime enemy walking",
+          "dimensions": {
+            "width": 48,
+            "height": 48,
+            "targetScale": 0.5,
+            "collisionBox": { "width": 20, "height": 20 }
+          }
+        },
+        {
+          "id": "mouse_walk",
+          "name": "Walking Mouse",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/mouse_walk_a.png",
+          "type": "enemy",
+          "tags": ["enemy", "mouse", "walk", "fast"],
+          "description": "Mouse enemy walking animation",
+          "dimensions": {
+            "width": 32,
+            "height": 32,
+            "targetScale": 0.75,
+            "collisionBox": { "width": 16, "height": 16 }
+          }
+        },
+        {
+          "id": "ladybug_walk",
+          "name": "Walking Ladybug",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/ladybug_walk_a(1).png",
+          "type": "enemy",
+          "tags": ["enemy", "ladybug", "walk", "flying"],
+          "description": "Ladybug enemy walking animation",
+          "dimensions": {
+            "width": 32,
+            "height": 32,
+            "targetScale": 0.75,
+            "collisionBox": { "width": 16, "height": 16 }
+          }
+        },
+        {
+          "id": "frog_idle",
+          "name": "Idle Frog",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/frog_idle.png",
+          "type": "enemy",
+          "tags": ["enemy", "frog", "idle", "jumping"],
+          "description": "Frog enemy in idle pose",
+          "dimensions": {
+            "width": 48,
+            "height": 32,
+            "targetScale": 0.5,
+            "collisionBox": { "width": 20, "height": 16 }
+          }
+        },
+        {
+          "id": "fish_blue_swim",
+          "name": "Blue Swimming Fish",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/fish_blue_swim_b.png",
+          "type": "enemy",
+          "tags": ["enemy", "fish", "swim", "water", "blue"],
+          "description": "Blue fish swimming animation",
+          "dimensions": {
+            "width": 32,
+            "height": 24,
+            "targetScale": 0.75,
+            "collisionBox": { "width": 16, "height": 12 }
+          }
+        },
+        {
+          "id": "block_fall",
+          "name": "Falling Block",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/block_fall.png",
+          "type": "enemy",
+          "tags": ["enemy", "block", "fall", "hazard"],
+          "description": "Falling block hazard",
+          "dimensions": {
+            "width": 32,
+            "height": 32,
+            "targetScale": 1.0,
+            "collisionBox": { "width": 32, "height": 32 }
+          }
+        }
+      ]
+    },
+    "backgrounds": {
+      "description": "Background images for different environments",
+      "targetSize": "fullscreen",
+      "assets": [
+        {
+          "id": "desert_background",
+          "name": "Desert Background",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/backgrounds/background_color_desert.png",
+          "type": "background",
+          "tags": ["background", "desert", "sand", "hot"],
+          "description": "Desert themed background with sand colors",
+          "dimensions": {
+            "width": 800,
+            "height": 600,
+            "targetScale": "fit",
+            "positioning": "center"
+          }
+        },
+        {
+          "id": "mushroom_background",
+          "name": "Mushroom Forest Background",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/backgrounds/background_fade_mushrooms.png",
+          "type": "background",
+          "tags": ["background", "mushroom", "forest", "fantasy"],
+          "description": "Fantasy mushroom forest background with fade effect",
+          "dimensions": {
+            "width": 800,
+            "height": 600,
+            "targetScale": "fit",
+            "positioning": "center"
+          }
+        },
+        {
+          "id": "hills_background",
+          "name": "Hills Background",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/backgrounds/background_color_hills(1).png",
+          "type": "background",
+          "tags": ["background", "hills", "nature", "green"],
+          "description": "Rolling hills background with natural colors",
+          "dimensions": {
+            "width": 800,
+            "height": 600,
+            "targetScale": "fit",
+            "positioning": "center"
+          }
+        },
+        {
+          "id": "clouds_background",
+          "name": "Clouds Background",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/backgrounds/background_clouds.png",
+          "type": "background",
+          "tags": ["background", "clouds", "sky", "aerial"],
+          "description": "Sky background with fluffy clouds",
+          "dimensions": {
+            "width": 800,
+            "height": 600,
+            "targetScale": "fit",
+            "positioning": "center"
+          }
+        }
+      ]
+    },
+    "tiles": {
+      "description": "Platform tiles, collectibles, and interactive objects",
+      "targetSize": 32,
+      "assets": [
+        {
+          "id": "ladder_top",
+          "name": "Ladder Top",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/ladder_top.png",
+          "type": "tile",
+          "tags": ["tile", "ladder", "climb", "top"],
+          "description": "Top part of climbable ladder",
+          "dimensions": {
+            "width": 32,
+            "height": 32,
+            "targetScale": 1.0,
+            "collisionBox": { "width": 32, "height": 32 }
+          }
+        },
+        {
+          "id": "ladder_middle",
+          "name": "Ladder Middle",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/ladder_middle.png",
+          "type": "tile",
+          "tags": ["tile", "ladder", "climb", "middle"],
+          "description": "Middle section of climbable ladder",
+          "dimensions": {
+            "width": 32,
+            "height": 32,
+            "targetScale": 1.0,
+            "collisionBox": { "width": 32, "height": 32 }
+          }
+        },
+        {
+          "id": "key_yellow",
+          "name": "Yellow Key",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/key_yellow(1).png",
+          "type": "collectible",
+          "tags": ["collectible", "key", "yellow", "unlock"],
+          "description": "Yellow key for unlocking doors",
+          "dimensions": {
+            "width": 24,
+            "height": 32,
+            "targetScale": 0.5,
+            "collisionBox": { "width": 12, "height": 16 }
+          }
+        },
+        {
+          "id": "grass_purple",
+          "name": "Purple Grass Platform",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/grass_purple(1).png",
+          "type": "platform",
+          "tags": ["platform", "grass", "purple", "ground"],
+          "description": "Purple grass platform tile",
+          "dimensions": {
+            "width": 64,
+            "height": 32,
+            "targetScale": 1.0,
+            "collisionBox": { "width": 64, "height": 16 }
+          }
+        },
+        {
+          "id": "flag_red",
+          "name": "Red Flag",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/flag_red_b(1).png",
+          "type": "goal",
+          "tags": ["goal", "flag", "red", "finish"],
+          "description": "Red flag marking level finish",
+          "dimensions": {
+            "width": 32,
+            "height": 64,
+            "targetScale": 0.75,
+            "collisionBox": { "width": 16, "height": 32 }
+          }
+        },
+        {
+          "id": "conveyor",
+          "name": "Conveyor Belt",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/conveyor.png",
+          "type": "platform",
+          "tags": ["platform", "conveyor", "moving", "mechanical"],
+          "description": "Moving conveyor belt platform",
+          "dimensions": {
+            "width": 64,
+            "height": 32,
+            "targetScale": 1.0,
+            "collisionBox": { "width": 64, "height": 16 }
+          }
+        },
+        {
+          "id": "coin_bronze",
+          "name": "Bronze Coin",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/coin_bronze(1).png",
+          "type": "collectible",
+          "tags": ["collectible", "coin", "bronze", "points"],
+          "description": "Bronze coin collectible for points",
+          "dimensions": {
+            "width": 24,
+            "height": 24,
+            "targetScale": 0.67,
+            "collisionBox": { "width": 16, "height": 16 }
+          }
+        },
+        {
+          "id": "cactus",
+          "name": "Cactus Obstacle",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/cactus(1).png",
+          "type": "obstacle",
+          "tags": ["obstacle", "cactus", "hazard", "desert"],
+          "description": "Cactus obstacle that damages player",
+          "dimensions": {
+            "width": 32,
+            "height": 48,
+            "targetScale": 0.67,
+            "collisionBox": { "width": 24, "height": 32 }
+          }
+        }
+      ]
+    }
+  },
+  "usage": {
+    "description": "How AI should use this enhanced asset registry",
+    "instructions": [
+      "All assets now include dimension information and targetScale values",
+      "Use the targetScale for consistent sizing across all games",
+      "collisionBox defines the actual gameplay collision area",
+      "Character sprites target 32px height when scaled",
+      "Enemy sprites target 24px average size when scaled",
+      "Collectibles target 16px average size when scaled",
+      "Platform tiles are designed for 32px grid alignment"
+    ],
+    "scalingSystem": {
+      "description": "Standardized scaling system for consistent game appearance",
+      "rules": [
+        "Always use asset.dimensions.targetScale for sprite scaling",
+        "Characters scale to ~32px gameplay height",
+        "Enemies scale to ~24px average size", 
+        "Collectibles scale to ~16px average size",
+        "Platforms scale to align with 32px grid",
+        "Use collisionBox for physics bodies, not full sprite size"
+      ]
+    },
+    "positioningSystem": {
+      "description": "Intelligent positioning system",
+      "gameGrid": 32,
+      "layoutRules": [
+        "Position sprites on 32px grid boundaries when possible",
+        "Player starts at (64, gameHeight - 96) for consistent ground placement",
+        "Platforms align to 32px grid: y positions like 480, 448, 416, etc.",
+        "Enemies spawn on platform surfaces using platform.y - 32",
+        "Collectibles float slightly above platforms: platform.y - 48",
+        "Backgrounds always center and fit to game dimensions"
+      ]
+    },
+    "example_implementation": {
+      "description": "Correct asset loading with standardized dimensions",
+      "character": {
+        "id": "character_yellow_idle", 
+        "scale": 0.5,
+        "targetSize": "32px gameplay height",
+        "positioning": "ground level at y = gameHeight - 96"
+      },
+      "enemies": {
+        "ids": ["snail_walk", "mouse_walk"],
+        "scales": [0.5, 0.75],
+        "targetSizes": ["24px average", "24px average"], 
+        "positioning": "on platform surfaces"
+      },
+      "platforms": {
+        "ids": ["grass_purple"],
+        "scales": [1.0],
+        "positioning": "32px grid alignment"
+      },
+      "collectibles": {
+        "ids": ["coin_bronze", "key_yellow"],
+        "scales": [0.67, 0.5],
+        "targetSizes": ["16px average", "16px average"],
+        "positioning": "floating above platforms"
+      }
+    }
+  }
+}

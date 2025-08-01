@@ -1,0 +1,84 @@
+@use 'variables.scss';
+@use 'z-index.scss';
+@use 'animations.scss';
+@use 'components/terminal.scss';
+@use 'components/resize-handle.scss';
+@use 'components/code.scss';
+@use 'components/editor.scss';
+@use 'components/toast.scss';
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #0a3d4a 50%, #064e3b 75%, #0f172a 100%);
+  background-attachment: fixed;
+}
+
+:root {
+  --gradient-opacity: 0.8;
+  --primary-color: rgba(16, 185, 129, var(--gradient-opacity));     // emerald-500
+  --secondary-color: rgba(5, 150, 105, var(--gradient-opacity));    // emerald-600
+  --accent-color: rgba(52, 211, 153, var(--gradient-opacity));      // emerald-400
+  // Old purple colors commented out
+  // --primary-color: rgba(158, 117, 240, var(--gradient-opacity));
+  // --secondary-color: rgba(138, 43, 226, var(--gradient-opacity));
+  // --accent-color: rgba(128, 59, 239, var(--gradient-opacity));
+}
+
+.modern-scrollbar {
+  overflow: auto;
+
+  // WebKit scrollbar styling
+  &::-webkit-scrollbar {
+    width: 2px;
+    height: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    // Use CSS variables for colors
+    background-color: var(--modern-scrollbar-thumb-background);
+    border-radius: 9999px; // pill shape
+    border: 2px solid transparent; // for padding-like effect
+    background-clip: content-box;
+    transition: background-color 0.2s ease-in-out; // Add transition
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    // Use CSS variable for hover color
+    background-color: var(--modern-scrollbar-thumb-backgroundHover);
+  }
+
+  // Firefox support
+  scrollbar-width: thin;
+  // Use CSS variables for Firefox colors
+  scrollbar-color: var(--modern-scrollbar-thumb-backgroundHover) transparent; // Use hover color for thumb for consistency
+}
+
+.modern-scrollbar-invert {
+  &::-webkit-scrollbar-thumb {
+    // Override with a contrasting color, e.g., primary text color with transparency
+    background-color: color-mix(in srgb, var(--bolt-elements-textPrimary), transparent 70%);
+  }
+}
+
+// Additional dark theme enhancements for game terminal
+:root {
+  // Force dark theme colors for game terminal
+  --bolt-elements-bg-depth-1: rgba(15, 23, 42, 0.95);     // slate-900 with transparency
+  --bolt-elements-bg-depth-2: rgba(30, 41, 59, 0.9);      // slate-800 with transparency  
+  --bolt-elements-bg-depth-3: rgba(51, 65, 85, 0.85);     // slate-700 with transparency
+  
+  // Dark text colors
+  --bolt-elements-textPrimary: rgba(248, 250, 252, 0.95); // slate-50
+  --bolt-elements-textSecondary: rgba(203, 213, 225, 0.8); // slate-300
+  --bolt-elements-textTertiary: rgba(148, 163, 184, 0.7);  // slate-400
+  
+  // Green accent colors
+  --bolt-elements-borderColor: rgba(16, 185, 129, 0.3);    // emerald-500 with transparency
+  --bolt-elements-borderColorActive: rgba(52, 211, 153, 0.8); // emerald-400
+}
