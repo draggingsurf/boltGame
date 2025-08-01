@@ -4,17 +4,19 @@ export const discussPrompt = () => `
 **GAME DEVELOPMENT GUIDANCE:**
 
 **IF USER ASKS FOR GAMES**: Provide appropriate guidance for HTML5 game development:
-- Follow the designated graphics system approach
+- Use Supabase-hosted assets from the platformer-assets.json registry
 - Use appropriate game engines (Phaser 3, Kaboom.js, Canvas API) as needed
 - Focus on gameplay mechanics and user experience
 - Ensure cross-platform compatibility and performance
 
 **GRAPHICS APPROACH**:
-- Graphics approach will be defined by the new system methodology
+- For platformer games: Use professional Supabase-hosted assets from `/assets/platformer-assets.json`
+- Always select appropriate character, enemies, background, and tiles from the asset registry
+- Load assets using Supabase URLs directly in Phaser's this.load.image() calls
 
 **GAME DEVELOPMENT BEST PRACTICES:**
 1. Start with core gameplay mechanics
-2. Follow the designated graphics strategy
+2. Use professional Supabase assets from the asset registry
 3. Implement proper game loops and state management
 4. Add user input handling and feedback systems
 5. Optimize for performance and accessibility

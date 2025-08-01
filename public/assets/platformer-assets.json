@@ -1,0 +1,239 @@
+{
+  "name": "Platformer Asset Registry",
+  "description": "Supabase-hosted assets for platformer games",
+  "version": "1.0.0",
+  "gameType": "platformer",
+  "categories": {
+    "characters": {
+      "description": "Player character sprites",
+      "assets": [
+        {
+          "id": "character_beige",
+          "name": "Beige Character",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/characters/character_beige_front(1).png",
+          "type": "character",
+          "tags": ["player", "idle", "beige"],
+          "description": "Beige character facing front"
+        },
+        {
+          "id": "character_green_duck",
+          "name": "Green Duck Character",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/characters/character_green_duck(1).png",
+          "type": "character",
+          "tags": ["player", "duck", "green"],
+          "description": "Green duck character"
+        },
+        {
+          "id": "character_pink_jump",
+          "name": "Pink Character Jumping",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/characters/character_pink_jump.png",
+          "type": "character",
+          "tags": ["player", "jump", "pink", "animation"],
+          "description": "Pink character in jumping pose"
+        },
+        {
+          "id": "character_purple_walk",
+          "name": "Purple Character Walking",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/characters/character_purple_walk_a.png",
+          "type": "character",
+          "tags": ["player", "walk", "purple", "animation"],
+          "description": "Purple character walking animation frame A"
+        },
+        {
+          "id": "character_yellow_idle",
+          "name": "Yellow Character Idle",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/characters/character_yellow_idle(1).png",
+          "type": "character",
+          "tags": ["player", "idle", "yellow"],
+          "description": "Yellow character in idle pose"
+        }
+      ]
+    },
+    "enemies": {
+      "description": "Enemy sprites for platformer games",
+      "assets": [
+        {
+          "id": "snail_walk",
+          "name": "Walking Snail",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/snail_walk_a(1).png",
+          "type": "enemy",
+          "tags": ["enemy", "snail", "walk", "slow"],
+          "description": "Snail enemy walking animation"
+        },
+        {
+          "id": "slime_block_walk",
+          "name": "Walking Slime Block",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/slime_block_walk_a(1).png",
+          "type": "enemy",
+          "tags": ["enemy", "slime", "walk", "block"],
+          "description": "Block slime enemy walking"
+        },
+        {
+          "id": "mouse_walk",
+          "name": "Walking Mouse",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/mouse_walk_a.png",
+          "type": "enemy",
+          "tags": ["enemy", "mouse", "walk", "fast"],
+          "description": "Mouse enemy walking animation"
+        },
+        {
+          "id": "ladybug_walk",
+          "name": "Walking Ladybug",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/ladybug_walk_a(1).png",
+          "type": "enemy",
+          "tags": ["enemy", "ladybug", "walk", "flying"],
+          "description": "Ladybug enemy walking animation"
+        },
+        {
+          "id": "frog_idle",
+          "name": "Idle Frog",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/frog_idle.png",
+          "type": "enemy",
+          "tags": ["enemy", "frog", "idle", "jumping"],
+          "description": "Frog enemy in idle pose"
+        },
+        {
+          "id": "fish_blue_swim",
+          "name": "Blue Swimming Fish",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/fish_blue_swim_b.png",
+          "type": "enemy",
+          "tags": ["enemy", "fish", "swim", "water", "blue"],
+          "description": "Blue fish swimming animation"
+        },
+        {
+          "id": "block_fall",
+          "name": "Falling Block",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/block_fall.png",
+          "type": "enemy",
+          "tags": ["enemy", "block", "fall", "hazard"],
+          "description": "Falling block hazard"
+        }
+      ]
+    },
+    "backgrounds": {
+      "description": "Background images for different environments",
+      "assets": [
+        {
+          "id": "desert_background",
+          "name": "Desert Background",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/backgrounds/background_color_desert.png",
+          "type": "background",
+          "tags": ["background", "desert", "sand", "hot"],
+          "description": "Desert themed background with sand colors"
+        },
+        {
+          "id": "mushroom_background",
+          "name": "Mushroom Forest Background",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/backgrounds/background_fade_mushrooms.png",
+          "type": "background",
+          "tags": ["background", "mushroom", "forest", "fantasy"],
+          "description": "Fantasy mushroom forest background with fade effect"
+        },
+        {
+          "id": "hills_background",
+          "name": "Hills Background",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/backgrounds/background_color_hills(1).png",
+          "type": "background",
+          "tags": ["background", "hills", "nature", "green"],
+          "description": "Rolling hills background with natural colors"
+        },
+        {
+          "id": "clouds_background",
+          "name": "Clouds Background",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/backgrounds/background_clouds.png",
+          "type": "background",
+          "tags": ["background", "clouds", "sky", "aerial"],
+          "description": "Sky background with fluffy clouds"
+        }
+      ]
+    },
+    "tiles": {
+      "description": "Platform tiles, collectibles, and interactive objects",
+      "assets": [
+        {
+          "id": "ladder_top",
+          "name": "Ladder Top",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/ladder_top.png",
+          "type": "tile",
+          "tags": ["tile", "ladder", "climb", "top"],
+          "description": "Top part of climbable ladder"
+        },
+        {
+          "id": "ladder_middle",
+          "name": "Ladder Middle",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/ladder_middle.png",
+          "type": "tile",
+          "tags": ["tile", "ladder", "climb", "middle"],
+          "description": "Middle section of climbable ladder"
+        },
+        {
+          "id": "key_yellow",
+          "name": "Yellow Key",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/key_yellow(1).png",
+          "type": "collectible",
+          "tags": ["collectible", "key", "yellow", "unlock"],
+          "description": "Yellow key for unlocking doors"
+        },
+        {
+          "id": "grass_purple",
+          "name": "Purple Grass Platform",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/grass_purple(1).png",
+          "type": "platform",
+          "tags": ["platform", "grass", "purple", "ground"],
+          "description": "Purple grass platform tile"
+        },
+        {
+          "id": "flag_red",
+          "name": "Red Flag",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/flag_red_b(1).png",
+          "type": "goal",
+          "tags": ["goal", "flag", "red", "finish"],
+          "description": "Red flag marking level finish"
+        },
+        {
+          "id": "conveyor",
+          "name": "Conveyor Belt",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/conveyor.png",
+          "type": "platform",
+          "tags": ["platform", "conveyor", "moving", "mechanical"],
+          "description": "Moving conveyor belt platform"
+        },
+        {
+          "id": "coin_bronze",
+          "name": "Bronze Coin",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/coin_bronze(1).png",
+          "type": "collectible",
+          "tags": ["collectible", "coin", "bronze", "points"],
+          "description": "Bronze coin collectible for points"
+        },
+        {
+          "id": "cactus",
+          "name": "Cactus Obstacle",
+          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/cactus(1).png",
+          "type": "obstacle",
+          "tags": ["obstacle", "cactus", "hazard", "desert"],
+          "description": "Cactus obstacle that damages player"
+        }
+      ]
+    }
+  },
+  "usage": {
+    "description": "How AI should use this asset registry",
+    "instructions": [
+      "For platformer games, select 1 character from 'characters' category",
+      "Select 1-3 enemies from 'enemies' category based on game complexity",
+      "Choose 1 background from 'backgrounds' category that matches the theme",
+      "Select appropriate tiles for platforms, collectibles, and obstacles",
+      "Use the 'tags' to match assets with game requirements",
+      "Always use the 'url' field for loading assets in Phaser games"
+    ],
+    "example_selection": {
+      "character": "character_yellow_idle",
+      "enemies": ["snail_walk", "mouse_walk"],
+      "background": "hills_background",
+      "platforms": ["grass_purple"],
+      "collectibles": ["coin_bronze", "key_yellow"],
+      "goal": ["flag_red"]
+    }
+  }
+}

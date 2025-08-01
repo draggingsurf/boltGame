@@ -112,14 +112,13 @@ Create a complete side-scrolling platformer game using **${engine === 'phaser' ?
 ## 🔧 Technical Requirements
 - **Game Engine:** ${engine === 'phaser' ? 'Phaser 3 (npm version)' : 'Canvas API with requestAnimationFrame'}
 - **Environment:** Bolt.new WebContainer
-- **Asset Handling:** Asset handling approach to be defined
+- **Asset Handling:** Use Supabase-hosted assets from `/public/assets/platformer-assets.json`
 - **No base64:** Always reference assets via file paths
 
 ## 📂 Project Structure
 \`\`\`
-/public/assets/         # Game assets directory
-  /sprites/              # Character and object sprites
-  /tiles/                # Platform and terrain tiles
+/public/assets/         # Supabase asset registry
+  platformer-assets.json # Asset registry with Supabase URLs
   /backgrounds/          # sky.png, clouds.png
   /audio/                # jump.mp3, coin.mp3, bgmusic.mp3
 /src/
@@ -154,19 +153,16 @@ ${complexity === 'complex' ? '- Multiple enemy types with advanced AI\n- Boss ba
 Use these exact paths in your ${engine === 'phaser' ? 'this.load.image()' : 'img.src'} calls:
 
 \`\`\`javascript
-${engine === 'phaser' ? `// In preload() function
-this.load.image('player', '/assets/player.png');
-this.load.image('enemy', '/assets/enemy.png');
-this.load.image('coin', '/assets/coin.png');
-this.load.image('ground', '/assets/ground.png');
-this.load.image('platform', '/assets/platform.png');
-this.load.image('sky', '/assets/sky.png');
-this.load.audio('jump', '/assets/jump.mp3');
-this.load.audio('coin', '/assets/coin.mp3');` : `// Canvas asset loading
+${engine === 'phaser' ? `// MANDATORY: Read platformer-assets.json first, then use Supabase URLs
+this.load.image('player', 'https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/characters/character_yellow_idle(1).png');
+this.load.image('enemy', 'https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/snail_walk_a(1).png');
+this.load.image('coin', 'https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/coin_bronze(1).png');
+this.load.image('platform', 'https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/grass_purple(1).png');
+this.load.image('background', 'https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/backgrounds/background_color_hills(1).png');` : `// Canvas asset loading with Supabase URLs
 const playerImg = new Image();
-playerImg.src = '/assets/player.png';
-const groundImg = new Image();
-groundImg.src = '/assets/ground.png';`}
+playerImg.src = 'https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/characters/character_yellow_idle(1).png';
+const enemyImg = new Image();
+enemyImg.src = 'https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/enemies/snail_walk_a(1).png';`}
 \`\`\`
 
 ## 🎯 Win/Lose Conditions
@@ -223,8 +219,8 @@ Create a top-down or side-scrolling shooter game using **${engine === 'phaser' ?
 - **Difficulty:** Increasing enemy spawn rate
 
 ## 📦 Assets
-- Use \`/assets/player.png\` for player ship
-- Use \`/assets/enemy.png\` for enemy ships
+- Use Supabase character assets from platformer-assets.json
+- Use Supabase enemy assets from platformer-assets.json
 - Use colored rectangles for bullets initially
 
 ${complexity === 'complex' ? '## 🎯 Advanced Features\n- Multiple weapon types\n- Power-ups and upgrades\n- Boss battles with phases\n- Particle effects for explosions' : ''}
@@ -292,7 +288,7 @@ When a user provides a vague game request (like "make a mario game" or "create f
    - Technical constraints
    - Expected output format
 
-**Graphics approach will be defined by the new system methodology.**
+**Always use professional Supabase-hosted assets from the platformer-assets.json registry for all platformer games.**
 
 Example transformation:
 User: "make a mario game"
