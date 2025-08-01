@@ -99,33 +99,53 @@ class UniformAssetHelper {
   }
 
   /**
-   * Create enhanced layered background (NOT stretched single image!)
+   * Create Phaser graphics background (NO image assets needed!)
    */
-  createBackground(assetId, spriteKey) {
-    // Mario-style layered background system
-    return this.createLayeredBackground(spriteKey);
+  createBackground(theme = 'sky') {
+    return this.createPhaserBackground(theme);
   }
   
   /**
-   * Create layered background system with no stretching
+   * Create background using pure Phaser graphics - much better than images!
    */
-  createLayeredBackground(backgroundKey = 'background') {
-    // Layer 1: Sky gradient for crisp quality
-    const skyGradient = this.scene.add.graphics();
-    skyGradient.fillGradientStyle(0x87CEEB, 0x87CEEB, 0x98D8FF, 0x98D8FF, 1);
-    skyGradient.fillRect(0, 0, this.gameWidth, 300);
+  createPhaserBackground(theme = 'sky') {
+    const backgrounds = {
+      sky: () => {
+        const skyGradient = this.scene.add.graphics();
+        skyGradient.fillGradientStyle(0x87CEEB, 0x87CEEB, 0x98D8FF, 0x98D8FF, 1);
+        skyGradient.fillRect(0, 0, this.gameWidth, this.gameHeight);
+        return skyGradient;
+      },
+      desert: () => {
+        const desertGradient = this.scene.add.graphics();
+        desertGradient.fillGradientStyle(0xF4A460, 0xF4A460, 0xFFD700, 0xFFD700, 1);
+        desertGradient.fillRect(0, 0, this.gameWidth, this.gameHeight);
+        return desertGradient;
+      },
+      forest: () => {
+        const forestGradient = this.scene.add.graphics();
+        forestGradient.fillGradientStyle(0x228B22, 0x228B22, 0x32CD32, 0x32CD32, 1);
+        forestGradient.fillRect(0, 0, this.gameWidth, this.gameHeight);
+        return forestGradient;
+      },
+      night: () => {
+        const nightGradient = this.scene.add.graphics();
+        nightGradient.fillGradientStyle(0x191970, 0x191970, 0x000080, 0x000080, 1);
+        nightGradient.fillRect(0, 0, this.gameWidth, this.gameHeight);
+        return nightGradient;
+      },
+      mario: () => {
+        // Classic Mario sky blue
+        const marioSky = this.scene.add.graphics();
+        marioSky.fillGradientStyle(0x5C94FC, 0x5C94FC, 0x87CEEB, 0x87CEEB, 1);
+        marioSky.fillRect(0, 0, this.gameWidth, this.gameHeight);
+        return marioSky;
+      }
+    };
     
-    // Layer 2: Tiled background for quality (NO stretching!)
-    const hillsBackground = this.scene.add.tileSprite(0, 200, this.gameWidth, 400, backgroundKey);
-    hillsBackground.setOrigin(0, 0);
-    hillsBackground.setAlpha(0.8);
-    hillsBackground.setScale(1.0); // Perfect pixel quality!
-    
-    // Store for parallax scrolling
-    this.backgroundLayers = { hills: hillsBackground };
-    
-    console.log('✅ Layered background created - no single image stretching!');
-    return { skyGradient, hillsBackground };
+    const background = backgrounds[theme] ? backgrounds[theme]() : backgrounds.sky();
+    console.log(`✅ Phaser ${theme} background created - no image assets needed!`);
+    return background;
   }
 
   /**

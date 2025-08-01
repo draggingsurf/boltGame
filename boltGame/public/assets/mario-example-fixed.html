@@ -99,10 +99,9 @@
                 this.load.image('heart', 'https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/heart.png');
                 this.load.image('key', 'https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/key_green.png');
                 
-                // ✅ BACKGROUND (1 asset)
-                this.load.image('background', 'https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/backgrounds/background_color_hills.png');
+                // ✅ NO BACKGROUND LOADING - Use Phaser graphics!
                 
-                console.log('✅ Total assets loaded: 21 (4 character + 6 enemies + 5 platforms + 5 collectibles + 1 background)');
+                console.log('✅ Total assets loaded: 20 (4 character + 6 enemies + 5 platforms + 5 collectibles + Phaser background)');
             }
 
             async create() {
@@ -112,9 +111,10 @@
                 this.assetHelper = new UniformAssetHelper(this, 800, 600);
                 await this.assetHelper.loadAssetRegistry();
                 
-                // ✅ BACKGROUND - Properly fitted (not stretched/distorted)
-                const bg = this.add.image(400, 300, 'background');
-                bg.setDisplaySize(800, 600);
+                // ✅ PHASER GRAPHICS BACKGROUND - No image assets needed!
+                const skyGradient = this.add.graphics();
+                skyGradient.fillGradientStyle(0x5C94FC, 0x5C94FC, 0x87CEEB, 0x87CEEB, 1);
+                skyGradient.fillRect(0, 0, 800, 600);
                 
                 // ✅ MARIO-STYLE STONE/BRICK PLATFORMS (NOT GRASS!)
                 this.platforms = this.physics.add.staticGroup();

@@ -303,76 +303,6 @@
         }
       ]
     },
-    "backgrounds": {
-      "description": "Essential background themes for different game environments",
-      "count": 8,
-      "assets": [
-        {
-          "id": "background_color_hills",
-          "name": "Hills Background",
-          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/backgrounds/background_color_hills.png",
-          "type": "background",
-          "tags": ["background", "hills", "nature", "green"],
-          "dimensions": { "width": 800, "height": 600, "scale": "fit" }
-        },
-        {
-          "id": "background_color_desert",
-          "name": "Desert Background",
-          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/backgrounds/background_color_desert.png",
-          "type": "background",
-          "tags": ["background", "desert", "sand", "hot"],
-          "dimensions": { "width": 800, "height": 600, "scale": "fit" }
-        },
-        {
-          "id": "background_color_mushrooms",
-          "name": "Mushroom Forest Background",
-          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/backgrounds/background_color_mushrooms.png",
-          "type": "background",
-          "tags": ["background", "mushroom", "forest", "fantasy"],
-          "dimensions": { "width": 800, "height": 600, "scale": "fit" }
-        },
-        {
-          "id": "background_color_trees",
-          "name": "Forest Background",
-          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/backgrounds/background_color_trees.png",
-          "type": "background",
-          "tags": ["background", "forest", "trees", "nature"],
-          "dimensions": { "width": 800, "height": 600, "scale": "fit" }
-        },
-        {
-          "id": "background_fade_hills",
-          "name": "Hills Fade Background",
-          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/backgrounds/background_fade_hills.png",
-          "type": "background",
-          "tags": ["background", "hills", "fade", "subtle"],
-          "dimensions": { "width": 800, "height": 600, "scale": "fit" }
-        },
-        {
-          "id": "background_clouds",
-          "name": "Clouds Background",
-          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/backgrounds/background_clouds.png",
-          "type": "background",
-          "tags": ["background", "clouds", "sky", "aerial"],
-          "dimensions": { "width": 800, "height": 600, "scale": "fit" }
-        },
-        {
-          "id": "background_solid_sky",
-          "name": "Sky Background",
-          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/backgrounds/background_solid_sky.png",
-          "type": "background",
-          "tags": ["background", "sky", "solid", "simple"],
-          "dimensions": { "width": 800, "height": 600, "scale": "fit" }
-        },
-        {
-          "id": "background_fade_desert",
-          "name": "Desert Fade Background",
-          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/backgrounds/background_fade_desert.png",
-          "type": "background",
-          "tags": ["background", "desert", "fade", "subtle"],
-          "dimensions": { "width": 800, "height": 600, "scale": "fit" }
-        }
-      ]
-    },
     "tiles_platforms": {
       "description": "Essential platform tiles for terrain building",
       "count": 25,
@@ -857,7 +787,7 @@
       "Characters have multiple states for animation",
       "Platforms have left/middle/right pieces for building longer platforms",
       "Collectibles include both game items and HUD elements",
-      "Backgrounds scale to fit screen using 'fit' scaling"
+      "Backgrounds use Phaser graphics - NO image assets needed!"
     ],
     "quickStart": {
       "simpleGame": {
@@ -865,21 +795,21 @@
         "enemy": "snail_walk_a", 
         "platform": "terrain_grass_block",
         "collectible": "coin_bronze",
-        "background": "background_color_hills"
+        "background": "sky_gradient"
       },
       "desertTheme": {
         "player": "character_yellow_idle",
         "enemy": "mouse_walk_a",
         "platform": "terrain_sand_block", 
         "collectible": "gem_yellow",
-        "background": "background_color_desert"
+        "background": "desert_gradient"
       },
       "winterTheme": {
         "player": "character_purple_idle",
         "enemy": "slime_normal_walk_a",
         "platform": "terrain_snow_block",
         "collectible": "gem_blue", 
-        "background": "background_fade_hills"
+        "background": "night_gradient"
       }
     },
     "exampleCode": {
@@ -889,11 +819,21 @@
     "assetCount": {
       "characters": 15,
       "enemies": 20, 
-      "backgrounds": 8,
       "platforms": 25,
       "collectibles": 20,
       "hazards": 12,
-      "total": 100
+      "total": 92
+    },
+    "backgroundSystem": {
+      "description": "Use Phaser's built-in graphics for backgrounds - much better than static images",
+      "method": "phaser_graphics",
+      "benefits": ["crisp gradients", "no distortion", "responsive", "lightweight", "customizable"],
+      "examples": {
+        "sky_gradient": "this.add.graphics().fillGradientStyle(0x87CEEB, 0x87CEEB, 0x98D8FF, 0x98D8FF, 1).fillRect(0, 0, 800, 600)",
+        "desert_gradient": "this.add.graphics().fillGradientStyle(0xF4A460, 0xF4A460, 0xFFD700, 0xFFD700, 1).fillRect(0, 0, 800, 600)",
+        "forest_gradient": "this.add.graphics().fillGradientStyle(0x228B22, 0x228B22, 0x32CD32, 0x32CD32, 1).fillRect(0, 0, 800, 600)",
+        "night_gradient": "this.add.graphics().fillGradientStyle(0x191970, 0x191970, 0x000080, 0x000080, 1).fillRect(0, 0, 800, 600)"
+      }
     }
   }
 } 

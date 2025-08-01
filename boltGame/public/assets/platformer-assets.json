@@ -195,67 +195,15 @@
         }
       ]
     },
-    "backgrounds": {
-      "description": "Background images for different environments",
-      "targetSize": "fullscreen",
-      "assets": [
-        {
-          "id": "desert_background",
-          "name": "Desert Background",
-          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/backgrounds/background_color_desert.png",
-          "type": "background",
-          "tags": ["background", "desert", "sand", "hot"],
-          "description": "Desert themed background with sand colors",
-          "dimensions": {
-            "width": 800,
-            "height": 600,
-            "targetScale": "fit",
-            "positioning": "center"
-          }
-        },
-        {
-          "id": "mushroom_background",
-          "name": "Mushroom Forest Background",
-          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/backgrounds/background_fade_mushrooms.png",
-          "type": "background",
-          "tags": ["background", "mushroom", "forest", "fantasy"],
-          "description": "Fantasy mushroom forest background with fade effect",
-          "dimensions": {
-            "width": 800,
-            "height": 600,
-            "targetScale": "fit",
-            "positioning": "center"
-          }
-        },
-        {
-          "id": "hills_background",
-          "name": "Hills Background",
-          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/backgrounds/background_color_hills(1).png",
-          "type": "background",
-          "tags": ["background", "hills", "nature", "green"],
-          "description": "Rolling hills background with natural colors",
-          "dimensions": {
-            "width": 800,
-            "height": 600,
-            "targetScale": "fit",
-            "positioning": "center"
-          }
-        },
-        {
-          "id": "clouds_background",
-          "name": "Clouds Background",
-          "url": "https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/backgrounds/background_clouds.png",
-          "type": "background",
-          "tags": ["background", "clouds", "sky", "aerial"],
-          "description": "Sky background with fluffy clouds",
-          "dimensions": {
-            "width": 800,
-            "height": 600,
-            "targetScale": "fit",
-            "positioning": "center"
-          }
-        }
-      ]
+    "backgroundSystem": {
+      "description": "Use Phaser graphics for backgrounds - much better than static images",
+      "method": "phaser_graphics",
+      "benefits": ["crisp gradients", "no distortion", "responsive", "lightweight"],
+      "examples": {
+        "sky": "this.add.graphics().fillGradientStyle(0x87CEEB, 0x87CEEB, 0x98D8FF, 0x98D8FF, 1).fillRect(0, 0, 800, 600)",
+        "desert": "this.add.graphics().fillGradientStyle(0xF4A460, 0xF4A460, 0xFFD700, 0xFFD700, 1).fillRect(0, 0, 800, 600)",
+        "forest": "this.add.graphics().fillGradientStyle(0x228B22, 0x228B22, 0x32CD32, 0x32CD32, 1).fillRect(0, 0, 800, 600)"
+      }
     },
     "tiles": {
       "description": "Platform tiles, collectibles, and interactive objects",

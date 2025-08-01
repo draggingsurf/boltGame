@@ -98,8 +98,7 @@
                 this.load.image('heart', 'https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/heart.png');
                 this.load.image('key', 'https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/tiles/key_green.png');
                 
-                // ✅ BACKGROUND LAYERS - Multiple assets for depth
-                this.load.image('background', 'https://xptqqsqivdlwaogiftxd.supabase.co/storage/v1/object/public/assets/platformer/sprites/backgrounds/background_color_hills.png');
+                // ✅ NO BACKGROUND LOADING - Use Phaser graphics instead!
                 
                 console.log('✅ Enhanced assets loaded: 21 total with strategic usage patterns');
             }
@@ -130,26 +129,39 @@
             }
 
             createLayeredBackground() {
-                // ✅ MARIO-STYLE LAYERED BACKGROUND SYSTEM
+                // ✅ PHASER GRAPHICS BACKGROUND SYSTEM - NO IMAGE ASSETS!
                 
-                // Layer 1: Sky gradient (no stretching!)
+                // Layer 1: Mario-style sky gradient
                 const skyGradient = this.add.graphics();
-                skyGradient.fillGradientStyle(0x87CEEB, 0x87CEEB, 0x98D8FF, 0x98D8FF, 1);
-                skyGradient.fillRect(0, 0, 800, 300);
+                skyGradient.fillGradientStyle(0x5C94FC, 0x5C94FC, 0x87CEEB, 0x87CEEB, 1);
+                skyGradient.fillRect(0, 0, 800, 600);
                 
-                // Layer 2: Distant hills (tiled for quality)
-                const hillsBackground = this.add.tileSprite(0, 200, 800, 400, 'background');
-                hillsBackground.setOrigin(0, 0);
-                hillsBackground.setAlpha(0.8);
-                hillsBackground.setScale(1.0); // No distortion!
+                // Layer 2: Distant mountains (pure graphics)
+                const mountains = this.add.graphics();
+                mountains.fillStyle(0x4169E1, 0.3);
+                mountains.beginPath();
+                mountains.moveTo(0, 300);
+                mountains.lineTo(200, 200);
+                mountains.lineTo(400, 250);
+                mountains.lineTo(600, 180);
+                mountains.lineTo(800, 220);
+                mountains.lineTo(800, 600);
+                mountains.lineTo(0, 600);
+                mountains.closePath();
+                mountains.fillPath();
                 
-                // Layer 3: Parallax scrolling clouds (if we had cloud assets)
-                // For now, we'll use subtle hill parallax
-                this.backgroundLayers = {
-                    hills: hillsBackground
-                };
+                // Layer 3: Simple cloud shapes (graphics)
+                const clouds = this.add.graphics();
+                clouds.fillStyle(0xFFFFFF, 0.8);
+                for (let i = 0; i < 5; i++) {
+                    const x = i * 180 + 50;
+                    const y = 100 + Math.sin(i) * 30;
+                    clouds.fillCircle(x, y, 25);
+                    clouds.fillCircle(x + 20, y, 35);
+                    clouds.fillCircle(x + 40, y, 25);
+                }
                 
-                console.log('✅ Layered background created - no more single stretched image!');
+                console.log('✅ Pure Phaser graphics background created - no image assets needed!');
             }
 
             createStrategicLevel() {
@@ -397,10 +409,7 @@
                     this.player.setTexture('player_jump');
                 }
                 
-                // Parallax background movement
-                if (isMoving && this.backgroundLayers) {
-                    this.backgroundLayers.hills.tilePositionX += this.player.body.velocity.x * 0.0005;
-                }
+                // No parallax needed - using pure Phaser graphics backgrounds!
                 
                 // Return to idle when grounded
                 if (this.player.body.touching.down && this.player.body.velocity.x === 0) {
