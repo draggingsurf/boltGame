@@ -112,7 +112,7 @@ Create a complete side-scrolling platformer game using **${engine === 'phaser' ?
 ## 🔧 Technical Requirements
 - **Game Engine:** ${engine === 'phaser' ? 'Phaser 3 (npm version)' : 'Canvas API with requestAnimationFrame'}
 - **Environment:** Bolt.new WebContainer
-- **Asset Handling:** Use Supabase-hosted assets from `/public/assets/platformer-assets.json`
+- **Asset Handling:** Use Supabase-hosted assets from /public/assets/platformer-assets.json
 - **No base64:** Always reference assets via file paths
 
 ## 📂 Project Structure

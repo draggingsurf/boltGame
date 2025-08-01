@@ -10,7 +10,7 @@ export const discussPrompt = () => `
 - Ensure cross-platform compatibility and performance
 
 **GRAPHICS APPROACH**:
-- For platformer games: Use professional Supabase-hosted assets from `/assets/platformer-assets.json`
+- For platformer games: Use professional Supabase-hosted assets from /assets/platformer-assets.json
 - Always select appropriate character, enemies, background, and tiles from the asset registry
 - Load assets using Supabase URLs directly in Phaser's this.load.image() calls
 
